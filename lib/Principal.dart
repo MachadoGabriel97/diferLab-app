@@ -58,7 +58,7 @@ class _PrincipalPageState extends State<Principal> {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const TelaCliente()
+                            builder: (context) => const TelaCliente(),
                         )
                     );
                   },

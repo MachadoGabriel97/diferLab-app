@@ -16,10 +16,34 @@ class _TelaServicoState extends State<TelaServico> {
         title: Text("Servicos"),
         backgroundColor: Colors.grey,
       ),
-      body: const Center(
+      body:  Padding(
+        padding: EdgeInsets.all(32),
         child: Column(
           children: [
-            Text("Tela Servico ")
+            Row(
+              children: [
+                Image.asset(
+                  "imagens/detalhe_servico.png",
+                  height: 100,
+                  width: 125,
+                ),
+                const Text(
+                  "Serviços da empresa:",
+                  style: TextStyle(
+                         fontSize: 24,
+                         fontStyle: FontStyle.italic,
+                         fontWeight: FontWeight.bold,
+                          backgroundColor: Colors.cyan
+                      ),
+
+                )
+              ],
+            ),
+            const Row(
+              children: [
+                Text("\nConsultoria\nAcompanhamento de Inventário\nAnálise de custos"),
+              ],
+            ),
           ],
         ),
       ),
