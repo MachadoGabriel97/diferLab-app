@@ -90,6 +90,11 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                 'Termo da LGPD:',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
+              Padding(
+                padding: EdgeInsets.all(32),
+                child: Text(
+                    "Obs.: Caso não aceite em receber as comunicações por e-mail, será de sua responsabilidade buscar os relatos diretamente com os responsáveis pelo programa."),
+              ),
               Row(
                 children: [
                   Expanded(
