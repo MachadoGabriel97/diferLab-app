@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:navigator_project/TelaCliente.dart';
 
-import 'TelaContato.dart';
+import 'TelaNovaIdeia.dart';
+import 'TelaMinhasIdeias.dart';
 import 'TelaEmpresa.dart';
 import 'TelaServico.dart';
 
@@ -18,6 +18,10 @@ class PrincipalApp extends StatelessWidget {
         useMaterial3: true,
       ),
       home: const Principal(title: 'Tela Inicial'),
+      routes: {
+        '/details': (context) => TelaNovaIdeia(),
+        '/details': (context) => TelaMinhasIdeias(),
+      },
     );
   }
 }
@@ -32,44 +36,50 @@ class Principal extends StatefulWidget {
 
 
 class _PrincipalPageState extends State<Principal> {
-
+  String recado = """Seja muito bem-vindo, Gabriel.\n Adoramos te acompanhar nessa jornada de criatividade e inspirações. Conte conosco com o que precisar.""";
 
   @override
   Widget build(BuildContext context) {
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
-      ),
+      backgroundColor: const Color.fromARGB(255, 40, 38, 71),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Image.asset("imagens/logo.png"),
+            Padding(
+                padding: EdgeInsets.only(left: 10, right: 10),
+              child: Text(
+                recado,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  color: Colors.white,
+                ),
+              ),),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
-                  child: Image.asset("imagens/menu_cliente.png"),
+                  child: Image.asset("imagens/btn_nova_ideia.png"),
                   onTap: (){
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const TelaCliente(),
+                            builder: (context) => const TelaNovaIdeia(),
                         )
                     );
                   },
                 ),
                 GestureDetector(
-                  child: Image.asset("imagens/menu_contato.png"),
+                  child: Image.asset("imagens/btn_minhas_ideias.png",),
                   onTap: (){
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const TelaContato()
+                            builder: (context) =>  TelaMinhasIdeias()
                         )
                     );
                   },
@@ -81,7 +91,7 @@ class _PrincipalPageState extends State<Principal> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 GestureDetector(
-                  child: Image.asset("imagens/menu_servico.png"),
+                  child: Image.asset("imagens/btn_anotacoes.png"),
                   onTap: (){
                     Navigator.push(
                         context,
@@ -92,7 +102,7 @@ class _PrincipalPageState extends State<Principal> {
                   },
                 ),
                 GestureDetector(
-                  child: Image.asset("imagens/menu_empresa.png"),
+                  child: Image.asset("imagens/btn_configuracoes.png"),
                   onTap: (){
                     Navigator.push(
                         context,
