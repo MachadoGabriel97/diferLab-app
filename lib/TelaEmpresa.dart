@@ -56,12 +56,6 @@ class _TelaEmpresaState extends State<TelaEmpresa> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Column(
-                    children: [
-                      Image.asset("imagens/atm_holdings.jpg",
-                        width: 100,),
-                    ],
-                  ),
                   const Text(
                     _atm_holding,
                     textAlign: TextAlign.justify,

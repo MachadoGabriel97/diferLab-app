@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/componenteMenu.dart';
 
 class TelaAnotacoes extends StatefulWidget {
   const TelaAnotacoes({super.key});
@@ -16,6 +17,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
         title: Text("Anotações"),
         backgroundColor: Colors.grey,
       ),
+      drawer: ComponenteMenu(),
       body: const Padding(
         padding: EdgeInsets.all(32),
         child: Column(
@@ -32,8 +34,8 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
         onPressed: () {
                Navigator.pushNamed(context, "/minhasIdeias");
             },
-        child: Icon(Icons.add_circle,) ,
-        tooltip: "Adicionar nova anotação",
+        child: Icon(Icons.note_add,) ,
+        tooltip: "Nova anotação",
       ),
     );
   }

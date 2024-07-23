@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/TelaNovaIdeia.dart';
+import 'package:navigator_project/componenteMenu.dart';
 
 class TelaMinhasIdeias extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Diferlab',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      title: "DiferLab",
       home: HomeScreen(),
       routes: {
-        '/details': (context) => DetailsScreen(),
-        '/nova-ideia': (context) => TelaNovaIdeia(),
-        /*'/anotacoes': (context) => AnotacoesScreen(), // Nova tela exemplo
-        '/configuracoes': (context) => ConfiguracoesScreen(), // Nova tela exemplo*/
-        },
+        '/detalhes': (context) => TelaDetalhes(),
+      },
     );
   }
 }
@@ -24,48 +19,10 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.lightbulb_outline),
-              title: Text('Nova Ideia'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.list),
-              title: Text('Minhas Ideias'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.note),
-              title: Text('Anotações'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Configurações'),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
       appBar: AppBar(
         title: Text('Minhas Ideias'),
       ),
+      drawer: ComponenteMenu(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -130,7 +87,7 @@ class HomeScreen extends StatelessWidget {
                         DataCell(IconButton(
                           icon: Icon(Icons.search),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/details', arguments: {
+                            Navigator.pushNamed(context, '/detalhes', arguments: {
                               'title': 'teste melhoria em algo',
                               'date': '20/07/2024',
                               'status': 'Análise',
@@ -149,7 +106,7 @@ class HomeScreen extends StatelessWidget {
                         DataCell(IconButton(
                           icon: Icon(Icons.search),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/details', arguments: {
+                            Navigator.pushNamed(context, '/detalhes', arguments: {
                               'title': 'teste alguma informação nova',
                               'date': '22/07/2024',
                               'status': 'Aprovado',
@@ -168,7 +125,7 @@ class HomeScreen extends StatelessWidget {
                         DataCell(IconButton(
                           icon: Icon(Icons.search),
                           onPressed: () {
-                            Navigator.pushNamed(context, '/details', arguments: {
+                            Navigator.pushNamed(context, '/detalhes', arguments: {
                               'title': 'teste sobre algo',
                               'date': '23/07/2024',
                               'status': 'Rejeitado',
@@ -208,51 +165,13 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class DetailsScreen extends StatelessWidget {
+class TelaDetalhes extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
 
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.lightbulb_outline),
-              title: Text('Nova Ideia'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.list),
-              title: Text('Minhas Ideias'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.note),
-              title: Text('Anotações'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Configurações'),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      drawer: ComponenteMenu(),
       appBar: AppBar(
         title: Text('Detalhes'),
         leading: IconButton(
@@ -321,6 +240,11 @@ class DetailsScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: (){},elevation: 10, child: Icon(Icons.chat, color: Colors.indigo,),
+        hoverColor: Colors.indigoAccent,
+        tooltip: "Ver acompanhamentos",
       ),
     );
   }

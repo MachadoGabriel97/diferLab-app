@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/componenteMenu.dart';
 
 class TelaNovaIdeia extends StatefulWidget {
   const TelaNovaIdeia({super.key});
@@ -11,45 +12,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: [
-            DrawerHeader(
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-              child: Text(
-                'Menu',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 24,
-                ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.lightbulb_outline),
-              title: Text('Nova Ideia'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.list),
-              title: Text('Minhas Ideias'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.note),
-              title: Text('Anotações'),
-              onTap: () {},
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Configurações'),
-              onTap: () {},
-            ),
-          ],
-        ),
-      ),
+      drawer:ComponenteMenu(),
       appBar: AppBar(
         title: Text('Nova Ideia'),
       ),

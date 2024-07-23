@@ -3,6 +3,7 @@ import 'package:navigator_project/TelaMinhasIdeias.dart';
 import 'package:navigator_project/TelaNovaIdeia.dart';
 
 import 'TelaAnotacoes.dart';
+import 'componenteMenu.dart';
 
 class TelaPrincipalRecados extends StatelessWidget {
   @override
@@ -47,47 +48,7 @@ class HomeScreen extends StatelessWidget {
           ],
         ),
       ),
-      drawer: Drawer(
-        child: ListView(
-          padding: EdgeInsets.zero,
-          children: <Widget>[
-            DrawerHeader(
-              child: Image.asset("imagens/logo.png"),
-              decoration: BoxDecoration(
-                color: Colors.blue,
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.lightbulb_outline),
-              title: Text('Nova Ideia'),
-              onTap: () {
-                Navigator.pushNamed(context, '/novaIdeia');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.list),
-              title: Text('Minhas Ideias'),
-              onTap: () {
-                Navigator.pushNamed(context, '/minhasIdeias');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.list),
-              title: Text('Anotações'),
-              onTap: () {
-                Navigator.pushNamed(context, '/anotacoes');
-              },
-            ),
-            ListTile(
-              leading: Icon(Icons.settings),
-              title: Text('Configurações'),
-              onTap: () {
-                Navigator.pushNamed(context, '/configuracoes');
-              },
-            ),
-          ],
-        ),
-      ),
+      drawer: const ComponenteMenu()
     );
   }
 }
