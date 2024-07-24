@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'Principal.dart';
+import 'TelaPrincipalRecados.dart';
 
 void main() {
   runApp( TelaPrincipalRecados());

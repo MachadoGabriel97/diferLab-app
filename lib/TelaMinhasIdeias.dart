@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/TelaAnotacoes.dart';
+import 'package:navigator_project/TelaConfiguracoes.dart';
 import 'package:navigator_project/TelaNovaIdeia.dart';
+import 'package:navigator_project/TelaPrincipalRecados.dart';
 import 'package:navigator_project/componenteMenu.dart';
+
+import 'componenteAppBar.dart';
+
+
 
 class TelaMinhasIdeias extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: "DiferLab",
+      theme: ThemeData.dark(),
       home: HomeScreen(),
       routes: {
         '/detalhes': (context) => TelaDetalhes(),
+        '/novaIdeia': (context) => TelaNovaIdeia(),
+        '/minhasIdeias': (context) => TelaMinhasIdeias(),
+        '/anotacoes': (context) => TelaAnotacoes(),
+        '/recados': (context) => TelaPrincipalRecados(),
+        '/configuracoes': (context) => TelaConfiguracoes(),
       },
+
     );
   }
 }
@@ -19,10 +33,9 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Minhas Ideias'),
-      ),
-      drawer: ComponenteMenu(),
+
+      appBar:  const ComponenteAppBar(tituloComponente: "Minhas Ideias"),
+      drawer: const ComponenteMenu(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -34,37 +47,40 @@ class HomeScreen extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text('Data da Sugestão:', style: TextStyle(fontWeight: FontWeight.bold)),
-                      Row(
+                      Column(
                         children: [
-                          Expanded(
-                            child: TextFormField(
-                              decoration: InputDecoration(labelText: 'Início', suffixIcon: Icon(Icons.calendar_today)),
+                          Text('Data da Sugestão:', style: TextStyle(fontWeight: FontWeight.bold)),
+
+                           TextFormField(
+                              decoration: InputDecoration(
+                                  labelText: 'Início',
+                                  suffixIcon: Icon(Icons.calendar_today)),
                             ),
-                          ),
+
                           SizedBox(width: 16),
-                          Expanded(
-                            child: TextFormField(
-                              decoration: InputDecoration(labelText: 'Fim', suffixIcon: Icon(Icons.calendar_today)),
+                          TextFormField(
+                              decoration: InputDecoration(
+                                  labelText: 'Fim',
+                                  suffixIcon: Icon(Icons.calendar_today)),
                             ),
-                          ),
+                          SizedBox(width: 16),
+                          DropdownButtonFormField<String>(
+                            decoration: InputDecoration(labelText: 'Selecione uma situação'),
+                            items: [
+                              DropdownMenuItem(value: null, child: Text('Não Filtrar')),
+                              DropdownMenuItem(value: 'analise', child: Text('Análise')),
+                              DropdownMenuItem(value: 'aprovado', child: Text('Aprovado')),
+                              DropdownMenuItem(value: 'rejeitado', child: Text('Rejeitado')),
+                            ],
+                            onChanged: (value) {},
+                          )
                         ],
                       ),
                     ],
                   ),
                 ),
-                SizedBox(width: 16),
-                Expanded(
-                  child: DropdownButtonFormField<String>(
-                    decoration: InputDecoration(labelText: 'Selecione uma situação'),
-                    items: [
-                      DropdownMenuItem(value: 'Análise', child: Text('Análise')),
-                      DropdownMenuItem(value: 'Aprovado', child: Text('Aprovado')),
-                      DropdownMenuItem(value: 'Rejeitado', child: Text('Rejeitado')),
-                    ],
-                    onChanged: (value) {},
-                  ),
-                ),
+
+
               ],
             ),
             SizedBox(height: 16),

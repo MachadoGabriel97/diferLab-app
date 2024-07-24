@@ -12,6 +12,7 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: Colors.black,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -20,6 +21,13 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
             decoration: BoxDecoration(
               color: Colors.blue,
             ),
+          ),
+          ListTile(
+            leading: Icon(Icons.mark_unread_chat_alt_outlined),
+            title: Text('Recados'),
+            onTap: () {
+              Navigator.pushNamed(context, '/recados');
+            },
           ),
           ListTile(
             leading: Icon(Icons.lightbulb_outline),

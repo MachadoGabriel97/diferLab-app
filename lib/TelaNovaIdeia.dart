@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/componenteMenu.dart';
 
+import 'componenteAppBar.dart';
+
 class TelaNovaIdeia extends StatefulWidget {
   const TelaNovaIdeia({super.key});
 
@@ -13,9 +15,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer:ComponenteMenu(),
-      appBar: AppBar(
-        title: Text('Nova Ideia'),
-      ),
+      appBar:  ComponenteAppBar(tituloComponente: "Nova Ideia"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

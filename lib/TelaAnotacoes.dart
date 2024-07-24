@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/componenteAppBar.dart';
 import 'package:navigator_project/componenteMenu.dart';
 
 class TelaAnotacoes extends StatefulWidget {
@@ -13,10 +14,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Anotações"),
-        backgroundColor: Colors.grey,
-      ),
+      appBar: ComponenteAppBar(tituloComponente: "Anotações"),
       drawer: ComponenteMenu(),
       body: const Padding(
         padding: EdgeInsets.all(32),
