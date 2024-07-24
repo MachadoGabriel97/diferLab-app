@@ -1,11 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:navigator_project/TelaMinhasIdeias.dart';
-import 'package:navigator_project/TelaNovaIdeia.dart';
-
+import 'package:navigator_project/telas/TelaConfiguracoes.dart';
+import 'package:navigator_project/telas/TelaMinhasIdeias.dart';
+import 'package:navigator_project/telas/TelaNovaIdeia.dart';
 import 'TelaAnotacoes.dart';
-import 'TelaConfiguracoes.dart';
-import 'componenteAppBar.dart';
-import 'componenteMenu.dart';
+import '../componentes/componenteAppBar.dart';
+import '../componentes/componenteMenu.dart';
 
 class TelaPrincipalRecados extends StatelessWidget {
   @override
@@ -13,6 +12,7 @@ class TelaPrincipalRecados extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark(useMaterial3: true),
       home: HomeScreen(),
+
       routes: {
         '/novaIdeia': (context) => TelaNovaIdeia(),
         '/minhasIdeias': (context) => TelaMinhasIdeias(),

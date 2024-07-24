@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:navigator_project/TelaAnotacoes.dart';
-import 'package:navigator_project/TelaConfiguracoes.dart';
-import 'package:navigator_project/TelaNovaIdeia.dart';
-import 'package:navigator_project/TelaPrincipalRecados.dart';
-import 'package:navigator_project/componenteMenu.dart';
+import 'package:navigator_project/telas/TelaAnotacoes.dart';
+import 'package:navigator_project/telas/TelaConfiguracoes.dart';
+import 'package:navigator_project/telas/TelaNovaIdeia.dart';
+import 'package:navigator_project/telas/TelaPrincipalRecados.dart';
+import 'package:navigator_project/componentes/componenteMenu.dart';
 
-import 'componenteAppBar.dart';
+import '../componentes/componenteAppBar.dart';
+
+
 
 
 

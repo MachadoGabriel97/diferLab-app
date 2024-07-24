@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:navigator_project/componenteMenu.dart';
+import 'package:navigator_project/componentes/componenteAppBar.dart';
+import 'package:navigator_project/componentes/componenteMenu.dart';
 
-import 'componenteAppBar.dart';
 
 class TelaNovaIdeia extends StatefulWidget {
   const TelaNovaIdeia({super.key});

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:navigator_project/componenteAppBar.dart';
-import 'package:navigator_project/componenteMenu.dart';
+import 'package:navigator_project/componentes/componenteAppBar.dart';
+import 'package:navigator_project/componentes/componenteMenu.dart';
 
 class TelaAnotacoes extends StatefulWidget {
   const TelaAnotacoes({super.key});
