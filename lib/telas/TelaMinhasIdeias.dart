@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
 
-      appBar:  const ComponenteAppBar(tituloComponente: "Minhas Ideias"),
+      appBar:  const ComponenteAppBar(tituloComponente: "Minhas Ideias",usuarioLogado: "Gabriel"),
       drawer: const ComponenteMenu(),
       body: Padding(
         padding: const EdgeInsets.all(16.0),

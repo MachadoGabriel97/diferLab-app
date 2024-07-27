@@ -15,7 +15,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer:ComponenteMenu(),
-      appBar:  ComponenteAppBar(tituloComponente: "Nova Ideia"),
+      appBar:  ComponenteAppBar(tituloComponente: "Nova Ideia",usuarioLogado: "Gabriel"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

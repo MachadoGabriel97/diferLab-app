@@ -14,7 +14,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ComponenteAppBar(tituloComponente: "Anotações"),
+      appBar: ComponenteAppBar(tituloComponente: "Anotações",usuarioLogado: "Gabriel"),
       drawer: ComponenteMenu(),
       body: const Padding(
         padding: EdgeInsets.all(32),

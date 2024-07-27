@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
+import 'package:navigator_project/componentes/componenteElevatedButton.dart';
 
 class TelaCadastro extends StatefulWidget {
   @override
@@ -24,14 +25,14 @@ class _RegisterScreenState extends State<TelaCadastro> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF242849), // Cor de fundo definida para hex 242849
-      appBar: const ComponenteAppBar(tituloComponente: "Cadastrar Nova Conta"),
+      appBar: const ComponenteAppBar(tituloComponente: "Cadastrar Nova Conta",usuarioLogado: "Gabriel"),
       body: LayoutBuilder(
         builder: (context, constraints) {
           double width =
           constraints.maxWidth > 480 ? 480 : constraints.maxWidth;
 
           return Padding(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Center(
               child: Form(
                 key: _formKey,
@@ -42,7 +43,7 @@ class _RegisterScreenState extends State<TelaCadastro> {
                       width: width,
                       child: TextFormField(
                         controller: _emailController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'E-mail',
                           filled: true,
                           fillColor: Colors.white,
@@ -60,12 +61,12 @@ class _RegisterScreenState extends State<TelaCadastro> {
                         },
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     SizedBox(
                       width: width,
                       child: TextFormField(
                         controller: _passwordController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Senha',
                           filled: true,
                           fillColor: Colors.white,
@@ -84,12 +85,12 @@ class _RegisterScreenState extends State<TelaCadastro> {
                         },
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                     SizedBox(
                       width: width,
                       child: TextFormField(
                         controller: _confirmPasswordController,
-                        decoration: InputDecoration(
+                        decoration: const InputDecoration(
                           labelText: 'Confirme a Senha',
                           filled: true,
                           fillColor: Colors.white,
@@ -108,21 +109,11 @@ class _RegisterScreenState extends State<TelaCadastro> {
                         },
                       ),
                     ),
-                    SizedBox(height: 20),
+                    const SizedBox(height: 20),
                     SizedBox(
                       width: width,
-                      child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: Color(0xFF03A9F4), // Cor do botão
-                          padding: EdgeInsets.symmetric(vertical: 16),
-                        ),
-                        onPressed: () {
-                          if (_formKey.currentState!.validate()) {
-                            // Implementar cadastro
-                          }
-                        },
-                        child: Text('Cadastrar'),
-                      ),
+                      child: ComponenteElevatedButton(corDoBotao: const Color(0xFF03A9F4),
+                          tituloBotao: "Cadastrar", formKey: _formKey,),
                     ),
                   ],
                 ),
