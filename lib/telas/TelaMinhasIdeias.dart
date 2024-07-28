@@ -6,6 +6,7 @@ import 'package:navigator_project/telas/TelaPrincipalRecados.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 
 import '../componentes/componenteAppBar.dart';
+import 'TelaNovaAnotacao.dart';
 
 
 
@@ -19,10 +20,10 @@ class TelaMinhasIdeias extends StatelessWidget {
       theme: ThemeData.dark(),
       home: HomeScreen(),
       routes: {
-        '/detalhes': (context) => TelaDetalhes(),
         '/novaIdeia': (context) => TelaNovaIdeia(),
         '/minhasIdeias': (context) => TelaMinhasIdeias(),
         '/anotacoes': (context) => TelaAnotacoes(),
+        '/NovaAnotacao': (context) => TelaNovaAnotacao(),
         '/recados': (context) => TelaPrincipalRecados(),
         '/configuracoes': (context) => TelaConfiguracoes(),
       },

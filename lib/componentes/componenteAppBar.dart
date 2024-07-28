@@ -26,13 +26,18 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
       style: TextStyle(color: Colors.white),),
       centerTitle: true,
       actions: [
-        SizedBox(
-          height: 20,
-          child: Text("Usuário: ${widget.usuarioLogado}", style: const TextStyle(color: Colors.white),),
+        Padding(
+          padding: EdgeInsets.all(20),
+          child: widget.usuarioLogado != null
+          ? Text(
+            "Usuário: ${widget.usuarioLogado}",
+            style: const TextStyle(color: Colors.white,fontSize: 10),
+          ):Container(),
         )
 
       ],
       backgroundColor: Colors.blue,
+
     );
   }
 }

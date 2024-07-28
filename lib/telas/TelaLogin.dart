@@ -4,6 +4,7 @@ import 'package:navigator_project/telas/TelaCadastro.dart';
 import 'TelaAnotacoes.dart';
 import 'TelaConfiguracoes.dart';
 import 'TelaMinhasIdeias.dart';
+import 'TelaNovaAnotacao.dart';
 import 'TelaNovaIdeia.dart';
 import 'TelaPrincipalRecados.dart';
 
@@ -17,12 +18,13 @@ class TelaLogin extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: homeTelaLogin(),
-      routes:  {
-          '/novaIdeia': (context) => const TelaNovaIdeia(),
-          '/minhasIdeias': (context) => TelaMinhasIdeias(),
-          '/anotacoes': (context) => const TelaAnotacoes(),
-          '/recados': (context) => TelaPrincipalRecados(),
-          '/configuracoes': (context) => const TelaConfiguracoes(),
+      routes: {
+        '/novaIdeia': (context) => TelaNovaIdeia(),
+        '/minhasIdeias': (context) => TelaMinhasIdeias(),
+        '/anotacoes': (context) => TelaAnotacoes(),
+        '/NovaAnotacao': (context) => TelaNovaAnotacao(),
+        '/recados': (context) => TelaPrincipalRecados(),
+        '/configuracoes': (context) => TelaConfiguracoes(),
       },
     );
   }
@@ -62,7 +64,6 @@ class homeTelaLogin extends StatelessWidget {
                           labelText: 'Usuário',
                           filled: true,
                           fillColor: Colors.white,
-                          border: OutlineInputBorder(),
                         ),
 
                         validator: (value) {

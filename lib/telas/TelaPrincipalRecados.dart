@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/telas/TelaConfiguracoes.dart';
 import 'package:navigator_project/telas/TelaMinhasIdeias.dart';
+import 'package:navigator_project/telas/TelaNovaAnotacao.dart';
 import 'package:navigator_project/telas/TelaNovaIdeia.dart';
 import 'TelaAnotacoes.dart';
 import '../componentes/componenteAppBar.dart';
@@ -12,11 +13,12 @@ class TelaPrincipalRecados extends StatelessWidget {
     return MaterialApp(
       theme: ThemeData.dark(useMaterial3: true),
       home: HomeScreen(),
-
+      title: "DiferLab",
       routes: {
         '/novaIdeia': (context) => TelaNovaIdeia(),
         '/minhasIdeias': (context) => TelaMinhasIdeias(),
         '/anotacoes': (context) => TelaAnotacoes(),
+        '/NovaAnotacao': (context) => TelaNovaAnotacao(),
         '/recados': (context) => TelaPrincipalRecados(),
         '/configuracoes': (context) => TelaConfiguracoes(),
       },

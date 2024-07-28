@@ -30,7 +30,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-               Navigator.pushNamed(context, "/minhasIdeias");
+               Navigator.pushNamed(context, "/NovaAnotacao");
             },
         child: Icon(Icons.note_add,) ,
         tooltip: "Nova anotação",

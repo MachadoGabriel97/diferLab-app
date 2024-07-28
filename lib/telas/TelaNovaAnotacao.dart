@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/componentes/componenteElevatedButton.dart';
 
 import '../componentes/componenteAppBar.dart';
 import '../componentes/componenteEditText.dart';
@@ -6,8 +7,8 @@ import '../componentes/componenteMenu.dart';
 
 
 class TelaNovaAnotacao extends StatefulWidget {
-  const TelaNovaAnotacao({super.key});
-
+  TelaNovaAnotacao({super.key});
+  final _formKey = GlobalKey<FormState>();
 
   @override
   State<TelaNovaAnotacao> createState() => _TelaNovaAnotacaoState();
@@ -20,8 +21,8 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer:ComponenteMenu(),
-      appBar:  ComponenteAppBar(tituloComponente: "Nova Anotação",usuarioLogado: "Gabriel"),
+      drawer: const ComponenteMenu(),
+      appBar: const ComponenteAppBar(tituloComponente: "Nova Anotação",usuarioLogado: "Gabriel"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -31,15 +32,15 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
                   textoLabel: "Título",
                   controller: controllerTitulo),
 
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ComponenteEditText(
                   textoLabel: "Descrição",
                   controller: controllerDescricao),
-              SizedBox(height: 16),
-              ElevatedButton(
-                onPressed: () {},
-                child: Text('Salvar'),
-              ),
+              const SizedBox(height: 16),
+             ComponenteElevatedButton(
+                 formKey: widget._formKey,
+                 corDoBotao: Colors.indigoAccent,
+                 tituloBotao: "Cadastrar"),
             ],
           ),
         ),

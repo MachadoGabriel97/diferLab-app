@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 
+enum TermoLgdp {Concordo, Discordo}
 
 class TelaNovaIdeia extends StatefulWidget {
   const TelaNovaIdeia({super.key});
@@ -11,81 +12,89 @@ class TelaNovaIdeia extends StatefulWidget {
 }
 
 class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
+  TermoLgdp? selecaoTermo;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer:ComponenteMenu(),
-      appBar:  ComponenteAppBar(tituloComponente: "Nova Ideia",usuarioLogado: "Gabriel"),
+      drawer:const ComponenteMenu(),
+      appBar:  const ComponenteAppBar(tituloComponente: "Nova Ideia",usuarioLogado: "Gabriel"),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
           child: ListView(
             children: [
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Título',
                 ),
                 maxLength: 30,
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Descrição (Problema ou melhoria)',
                 ),
                 maxLength: 200,
                 maxLines: 3,
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Solução Proposta',
                 ),
                 maxLength: 200,
                 maxLines: 3,
               ),
               TextFormField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Benefícios de implementação',
                 ),
                 maxLength: 200,
                 maxLines: 3,
               ),
-              SizedBox(height: 16),
-              Text(
+              const SizedBox(height: 16),
+              const Text(
                 'Termo da LGPD:',
                 style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              Padding(
-                padding: EdgeInsets.all(32),
+              const Padding(
+                padding: EdgeInsets.all(16),
                 child: Text(
                     "Obs.: Caso não aceite em receber as comunicações por e-mail, será de sua responsabilidade buscar os relatos diretamente com os responsáveis pelo programa."),
               ),
-              Row(
+              Column(
                 children: [
-                  Expanded(
-                    child: ListTile(
-                      title: const Text('Concordo'),
-                      leading: Radio(
-                        value: true,
-                        groupValue: true,
-                        onChanged: (bool? value) {},
-                      ),
-                    ),
+                  const Row(
+                    children: [
+                      Text("Aceite do Termo:"),
+                    ],
                   ),
-                  Expanded(
-                    child: ListTile(
-                      title: const Text('Discordo'),
-                      leading: Radio(
-                        value: false,
-                        groupValue: true,
-                        onChanged: (bool? value) {},
-                      ),
-                    ),
+                  RadioListTile<TermoLgdp>(
+                    title: const Text("Concordo"),
+                    value: TermoLgdp.Concordo,
+                    groupValue: selecaoTermo,
+                    onChanged: (TermoLgdp? valor_selecionado) {
+                      setState(() {
+                        selecaoTermo = valor_selecionado;
+                      });
+                    },
                   ),
+                  RadioListTile<TermoLgdp>(
+                    title: const Text("Discordo"),
+                    value: TermoLgdp.Discordo,
+                    groupValue: selecaoTermo,
+                    onChanged: (TermoLgdp? valor_selecionado) {
+                      setState(() {
+                        selecaoTermo = valor_selecionado;
+                      });
+                    },
+                  ),
+
                 ],
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               ElevatedButton(
                 onPressed: () {},
-                child: Text('Salvar'),
+                child: const Text('Salvar'),
               ),
             ],
           ),

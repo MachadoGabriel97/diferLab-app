@@ -25,7 +25,7 @@ class _RegisterScreenState extends State<TelaCadastro> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF242849), // Cor de fundo definida para hex 242849
-      appBar: const ComponenteAppBar(tituloComponente: "Cadastrar Nova Conta",usuarioLogado: "Gabriel"),
+      appBar: const ComponenteAppBar(tituloComponente: "Cadastrar Conta"),
       body: LayoutBuilder(
         builder: (context, constraints) {
           double width =
