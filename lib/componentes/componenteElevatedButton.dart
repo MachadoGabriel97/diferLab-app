@@ -4,8 +4,14 @@ class ComponenteElevatedButton extends StatelessWidget {
 
   final Color corDoBotao  ;
   final String tituloBotao;
+  final VoidCallback funcao;
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  ComponenteElevatedButton({super.key, required this.formKey, required this.corDoBotao, required this.tituloBotao});
+  ComponenteElevatedButton({super.key,
+    required this.formKey,
+    required this.corDoBotao,
+    required this.tituloBotao,
+    required this.funcao
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +20,9 @@ class ComponenteElevatedButton extends StatelessWidget {
         backgroundColor: this.corDoBotao, // Cor do botão
         padding: EdgeInsets.symmetric(vertical: 16),
       ),
+
       onPressed: () {
+        this.funcao();
         if (formKey.currentState!.validate()) {
           ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
             backgroundColor: Colors.green,
@@ -24,6 +32,7 @@ class ComponenteElevatedButton extends StatelessWidget {
                 "Dados salvos com sucesso!\n Favor realizar seu login com o usuário e senha criados."),
 
           ));
+
           Navigator.pop(context);
         }
       },

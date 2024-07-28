@@ -40,7 +40,7 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
              ComponenteElevatedButton(
                  formKey: widget._formKey,
                  corDoBotao: Colors.indigoAccent,
-                 tituloBotao: "Cadastrar"),
+                 tituloBotao: "Cadastrar",funcao: (){},),
             ],
           ),
         ),

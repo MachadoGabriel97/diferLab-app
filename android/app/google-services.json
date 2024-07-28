@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "689521290036",
+    "project_id": "diferlab-7aa9f",
+    "storage_bucket": "diferlab-7aa9f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689521290036:android:b719f35c7c72f45f641361",
+        "android_client_info": {
+          "package_name": "com.example.navigator_project"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCw10NcUTWn_Ymt9UiUKN0XCSUigDzYjaM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

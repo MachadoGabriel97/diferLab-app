@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteElevatedButton.dart';
+import 'package:navigator_project/servicos/AutenticacaoServico.dart';
 
 class TelaCadastro extends StatefulWidget {
   @override
@@ -112,8 +113,14 @@ class _RegisterScreenState extends State<TelaCadastro> {
                     const SizedBox(height: 20),
                     SizedBox(
                       width: width,
-                      child: ComponenteElevatedButton(corDoBotao: const Color(0xFF03A9F4),
-                          tituloBotao: "Cadastrar", formKey: _formKey,),
+                      child: ComponenteElevatedButton(
+                        corDoBotao: const Color(0xFF03A9F4),
+                        tituloBotao: "Cadastrar",
+                        formKey: _formKey,
+                        funcao: (){
+                          AutenticacaoServico().cadastrarUsuario( email: _emailController.text.toString(), senha:_passwordController.text.toString());
+                        },
+                      ),
                     ),
                   ],
                 ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/servicos/AutenticacaoServico.dart';
 import 'package:navigator_project/telas/TelaCadastro.dart';
 
 import 'TelaAnotacoes.dart';
@@ -125,11 +126,16 @@ class homeTelaLogin extends StatelessWidget {
                           padding: const EdgeInsets.symmetric(vertical: 16),
                         ),
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => TelaCadastro()),
-                          );
+                          if(_formKey.currentState!.validate()){
+                            AutenticacaoServico().conectarConta(email: _usernameController.text.toString(), senha: _passwordController.text.toString());
+                            print("passei");
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => TelaCadastro()),
+                            );
+                          }
+
                         },
                         icon: const Icon(Icons.person_add,
                             color: Colors.white), // Ícone de cadastro
