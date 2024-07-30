@@ -15,9 +15,10 @@ class AutenticacaoServico {
     required String email,
     required String senha,
   }){
-
+    /// usuario teste - admin@diferlab.com.br
+    /// senha: QWas12@#
      Future<UserCredential> user =  firebaseAuth.signInWithEmailAndPassword(email: email, password: senha);
-     print("retorno:${user.toString()}");
+     print("retorno:${user.hashCode.toString()}");
      print("USER:${firebaseAuth.currentUser.toString()}");
      print("email:${firebaseAuth.currentUser?.email.toString()}");
 
