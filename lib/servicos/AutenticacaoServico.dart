@@ -16,7 +16,8 @@ class AutenticacaoServico {
     required String senha,
   }){
 
-    firebaseAuth.signInWithEmailAndPassword(email: email, password: senha);
+     Future<UserCredential> user =  firebaseAuth.signInWithEmailAndPassword(email: email, password: senha);
+     print("retorno:${user.toString()}");
      print("USER:${firebaseAuth.currentUser.toString()}");
      print("email:${firebaseAuth.currentUser?.email.toString()}");
 
