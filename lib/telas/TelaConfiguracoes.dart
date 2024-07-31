@@ -36,18 +36,26 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                   ),
                   ComponenteEditText(
                     textoLabel: "Colaborador",
+                    valorParametro: 'colaborador',
+                    tamanhoMaximo: 30,
                     controller: controleNomeColaborador,
                   ),
                   ComponenteEditText(
                     textoLabel: "Gestor direto",
+                    valorParametro: 'gestor_direto',
+                    tamanhoMaximo: 30,
                     controller: controleNomeGestor,
                   ),
                   ComponenteEditText(
                     textoLabel: "Setor",
+                    valorParametro: 'setor',
+                    tamanhoMaximo: 40,
                     controller: controleNomeArea,
                   ),
                   ComponenteEditText(
                     textoLabel: "E-mail",
+                     valorParametro: 'email',
+                    tamanhoMaximo: 50,
                     controller: controleEmail,
                   ),
                   Column(

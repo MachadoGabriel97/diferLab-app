@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/telas/TelaConfiguracoes.dart';
+import 'package:navigator_project/telas/TelaLogin.dart';
 import 'package:navigator_project/telas/TelaMinhasIdeias.dart';
 import 'package:navigator_project/telas/TelaNovaAnotacao.dart';
 import 'package:navigator_project/telas/TelaNovaIdeia.dart';
@@ -8,11 +9,13 @@ import '../componentes/componenteAppBar.dart';
 import '../componentes/componenteMenu.dart';
 
 class TelaPrincipalRecados extends StatelessWidget {
+
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      theme: ThemeData.dark(useMaterial3: true),
-      home: HomeScreen(),
+      theme: ThemeData.light(),
+      home: telaPrincipal(context),
       title: "DiferLab",
       routes: {
         '/novaIdeia': (context) => TelaNovaIdeia(),
@@ -21,19 +24,18 @@ class TelaPrincipalRecados extends StatelessWidget {
         '/NovaAnotacao': (context) => TelaNovaAnotacao(),
         '/recados': (context) => TelaPrincipalRecados(),
         '/configuracoes': (context) => TelaConfiguracoes(),
+        '/login': (context) => TelaLogin(),
       },
     );
   }
-}
 
-class HomeScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
+  Widget telaPrincipal(BuildContext context) {
     return const Scaffold(
       drawer: ComponenteMenu(),
-      appBar: ComponenteAppBar(tituloComponente: "Recados",usuarioLogado: "Gabriel",),
+      appBar: ComponenteAppBar(
+        tituloComponente: "Recados", usuarioLogado: "Gabriel",),
       body: Padding(
-        padding:  EdgeInsets.all(16.0),
+        padding: EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

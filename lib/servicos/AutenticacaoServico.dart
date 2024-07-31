@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 class AutenticacaoServico {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
 
-
   cadastrarUsuario({
     required String email,
     required String senha,
@@ -11,22 +10,30 @@ class AutenticacaoServico {
     firebaseAuth.createUserWithEmailAndPassword(email: email, password: senha);
   }
 
-  conectarConta({
+  bool conectarConta({
     required String email,
     required String senha,
-  }){
+  }) {
     /// usuario teste - admin@diferlab.com.br
     /// senha: QWas12@#
-     Future<UserCredential> user =  firebaseAuth.signInWithEmailAndPassword(email: email, password: senha);
-     print("retorno:${user.hashCode.toString()}");
-     print("USER:${firebaseAuth.currentUser.toString()}");
-     print("email:${firebaseAuth.currentUser?.email.toString()}");
-
+    Future<UserCredential> credencialUsuario =
+        firebaseAuth.signInWithEmailAndPassword(email: email, password: senha);
+    User? usuario = firebaseAuth.currentUser;
+    try {
+      if (usuario != null) {
+        print("retorno:${credencialUsuario.hashCode.toString()}");
+        print("USER:${credencialUsuario}");
+        print("email:${firebaseAuth.currentUser?.email.toString()}");
+        return true;
+      }
+    } catch (e) {
+      print(e.toString());
+      sairDaConta();
+    }
+    return false;
   }
 
-  sairDaConta(){
+  void sairDaConta() {
     firebaseAuth.signOut();
   }
-
 }
-

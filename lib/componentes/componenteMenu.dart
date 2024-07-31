@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:navigator_project/servicos/AutenticacaoServico.dart';
 
 class ComponenteMenu extends StatefulWidget {
   const ComponenteMenu({super.key});
@@ -12,7 +13,7 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      backgroundColor: Colors.black,
+      //backgroundColor: Colors.black,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -55,6 +56,14 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
             title: Text('Configurações'),
             onTap: () {
               Navigator.pushNamed(context, '/configuracoes');
+            },
+          ),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Sair'),
+            onTap: () {
+              AutenticacaoServico().sairDaConta();
+              Navigator.popAndPushNamed(context, '/login');
             },
           ),
         ],

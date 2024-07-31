@@ -6,6 +6,7 @@ import 'package:navigator_project/telas/TelaPrincipalRecados.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 
 import '../componentes/componenteAppBar.dart';
+import 'TelaLogin.dart';
 import 'TelaNovaAnotacao.dart';
 
 
@@ -26,6 +27,7 @@ class TelaMinhasIdeias extends StatelessWidget {
         '/NovaAnotacao': (context) => TelaNovaAnotacao(),
         '/recados': (context) => TelaPrincipalRecados(),
         '/configuracoes': (context) => TelaConfiguracoes(),
+        '/login': (context) => TelaLogin(),
       },
 
     );

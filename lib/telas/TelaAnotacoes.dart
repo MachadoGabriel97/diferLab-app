@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 
+import '../componentes/componenteListaAnotacoes.dart';
+
 class TelaAnotacoes extends StatefulWidget {
   const TelaAnotacoes({super.key});
 
@@ -16,15 +18,11 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
     return Scaffold(
       appBar: ComponenteAppBar(tituloComponente: "Anotações",usuarioLogado: "Gabriel"),
       drawer: ComponenteMenu(),
-      body: const Padding(
-        padding: EdgeInsets.all(32),
+      body:  SingleChildScrollView(
+        padding: EdgeInsets.all(16),
         child: Column(
           children: [
-             Row(
-              children: [
-                Text("Sem dados para mostrar no momento"),
-              ],
-            ),
+            ComponenteListaAnotacoes(usuarioEmail: "admin@diferlab.com.br")
           ],
         ),
       ),

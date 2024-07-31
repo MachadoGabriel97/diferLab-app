@@ -117,6 +117,8 @@ class _RegisterScreenState extends State<TelaCadastro> {
                         corDoBotao: const Color(0xFF03A9F4),
                         tituloBotao: "Cadastrar",
                         formKey: _formKey,
+                        mensagem_snackbar: "Dados salvos com sucesso!\n Favor realizar seu login com o usuário e senha criados.",
+                        fechaTela: true,
                         funcao: (){
                           AutenticacaoServico().cadastrarUsuario( email: _emailController.text.toString(), senha:_passwordController.text.toString());
                         },
