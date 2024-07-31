@@ -24,6 +24,8 @@ class TelaMinhasIdeias extends StatelessWidget {
         '/novaIdeia': (context) => TelaNovaIdeia(),
         '/minhasIdeias': (context) => TelaMinhasIdeias(),
         '/anotacoes': (context) => TelaAnotacoes(),
+        '/detalhes': (context) => TelaDetalhes(),
+
         '/NovaAnotacao': (context) => TelaNovaAnotacao(),
         '/recados': (context) => TelaPrincipalRecados(),
         '/configuracoes': (context) => TelaConfiguracoes(),
