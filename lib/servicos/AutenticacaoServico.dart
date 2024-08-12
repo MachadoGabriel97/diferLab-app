@@ -1,13 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class AutenticacaoServico {
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
+  FirebaseFirestore storage = FirebaseFirestore.instance;
 
   cadastrarUsuario({
     required String email,
     required String senha,
   }) {
     firebaseAuth.createUserWithEmailAndPassword(email: email, password: senha);
+
   }
 
   bool conectarConta({

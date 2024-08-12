@@ -7,6 +7,7 @@ import 'package:navigator_project/telas/TelaNovaIdeia.dart';
 import 'TelaAnotacoes.dart';
 import '../componentes/componenteAppBar.dart';
 import '../componentes/componenteMenu.dart';
+import 'TelaDetalhes.dart';
 
 class TelaPrincipalRecados extends StatelessWidget {
 

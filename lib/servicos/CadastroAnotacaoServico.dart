@@ -14,7 +14,7 @@ class CadastroAnotacaoServico {
         required this.data,
       required this.usuario_email}) {
     final docRef =
-        db.collection("anotacoes").doc(); // Automatically generates a unique ID
+        db.collection("anotacoes").doc();
     docRef.set(toMap()).then((_) {
       print('Documento salvo com ID: ${docRef.id}');
     }).catchError((error) {
@@ -51,6 +51,26 @@ class CadastroAnotacaoServico {
       print('Erro ao buscar anotações: $e');
     }
     return anotacoes;
+  }
+
+  Future<void> atualizarAnotacao(String docId) async {
+    final docRef = db.collection("anotacoes").doc(docId);
+    try {
+      await docRef.update(toMap());
+      print('Documento atualizado com sucesso: $docId');
+    } catch (error) {
+      print('Erro ao atualizar o documento: $error');
+    }
+  }
+
+  Future<void> deletarAnotacao(String docId) async {
+    final docRef = db.collection("anotacoes").doc(docId);
+    try {
+      await docRef.delete();
+      print('Documento Deletado com sucesso: $docId');
+    } catch (error) {
+      print('Erro ao atualizar o documento: $error');
+    }
   }
 }
 

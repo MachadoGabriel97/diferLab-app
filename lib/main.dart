@@ -8,7 +8,14 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(TelaLogin());
+  runApp(MaterialApp(
+    home: TelaLogin(),
+
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+
+  ));
 }
 
 
