@@ -13,6 +13,19 @@ class TelaAnotacoes extends StatefulWidget {
 
 
 class _TelaAnotacoesState extends State<TelaAnotacoes> {
+  late String email;
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () {
+      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+      setState(() {
+        email = arguments['email'];
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +35,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            ComponenteListaAnotacoes(usuarioEmail: "admin@diferlab.com.br")
+            ComponenteListaAnotacoes(usuarioEmail: "gabrielmachadodasilva97@gmail.com")
           ],
         ),
       ),

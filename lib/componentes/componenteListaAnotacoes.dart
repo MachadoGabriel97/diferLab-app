@@ -35,11 +35,12 @@ class ComponenteListaAnotacoes extends StatelessWidget {
               return ListTile(
                 onTap: () {
                   Navigator.popAndPushNamed(context, '/NovaAnotacao',
-                      arguments: {'titulo': anotacao['titulo'], 'descricao': anotacao['descricao']});
+                      arguments: {'titulo': anotacao['titulo'], 'descricao': anotacao['descricao'], 'email': usuarioEmail});
+                  print(anotacao.toString());
                 },
                 title: Row(children: [
                   Text('Criação: ${dataFormatada}'),
-                  Text('  Titulo: ${anotacao['titulo']}' ?? 'Sem título')
+                  Text('  Titulo: ${anotacao['titulo']}')
                 ]),
                 subtitle: Text(anotacao['descricao'] ?? 'Sem descrição'),
               );

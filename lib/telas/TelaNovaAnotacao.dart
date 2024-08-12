@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteElevatedButton.dart';
-import 'package:navigator_project/telas/TelaAnotacoes.dart';
 
 import '../componentes/componenteAppBar.dart';
 import '../componentes/componenteEditText.dart';
@@ -17,8 +16,26 @@ class TelaNovaAnotacao extends StatefulWidget {
 }
 
 class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
-  TextEditingController controllerTitulo = TextEditingController();
-  TextEditingController controllerDescricao = TextEditingController();
+
+  late TextEditingController controllerTitulo = TextEditingController();
+  late TextEditingController controllerDescricao = TextEditingController();
+  late String email='';
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () {
+      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+      setState(() {
+        controllerTitulo = TextEditingController(text: arguments['titulo']);
+        controllerDescricao = TextEditingController(text: arguments['descricao']);
+        email = arguments['email'];
+      });
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +79,7 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
                        descricao: controllerDescricao.text.toString(),
                        titulo: controllerTitulo.text.toString(),
                        data: DateTime.now(),
-                       usuario_email: "admin@diferlab.com.br"
+                       usuario_email: email,
                    );
                    //fecha tela e abre a tela inicial
                    Navigator.popAndPushNamed(context, '/anotacoes');

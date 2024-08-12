@@ -27,7 +27,7 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
       centerTitle: true,
       actions: [
         Padding(
-          padding: EdgeInsets.all(20),
+          padding: EdgeInsets.all(10),
           child: widget.usuarioLogado != null
           ? Row(
               children: [
@@ -35,9 +35,8 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
                   "${widget.usuarioLogado}",
                   style: const TextStyle(color: Colors.white,fontSize: 10),
                 ),
-                const CircleAvatar(
-                    backgroundImage: AssetImage("imagens/cadastro_usuario.png"),
-                   radius: 80,
+                 CircleAvatar(
+                   backgroundImage:  AssetImage("imagens/cadastro_usuario.png"),
                 ),
               ],
            ):Container(),
