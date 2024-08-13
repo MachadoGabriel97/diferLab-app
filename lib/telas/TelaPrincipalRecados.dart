@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:navigator_project/telas/TelaConfiguracoes.dart';
-import 'package:navigator_project/telas/TelaLogin.dart';
-import 'package:navigator_project/telas/TelaMinhasIdeias.dart';
-import 'package:navigator_project/telas/TelaNovaAnotacao.dart';
-import 'package:navigator_project/telas/TelaNovaIdeia.dart';
-import 'TelaAnotacoes.dart';
+
 import '../componentes/componenteAppBar.dart';
 import '../componentes/componenteMenu.dart';
 import 'TelaDetalhes.dart';
@@ -17,15 +12,25 @@ class TelaPrincipalRecados extends StatefulWidget {
 }
 
 class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
+  late String email;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+      setState(() {
+        email = arguments['email'];
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      theme: ThemeData.light(),
-      home:  const Scaffold(
-        drawer: ComponenteMenu(),
+    return   Scaffold(
+        drawer:  const ComponenteMenu(),
         appBar: ComponenteAppBar(
-          tituloComponente: "Recados", usuarioLogado: "Gabriel",),
-        body: Padding(
+          tituloComponente: "Recados", usuarioLogado: email,),
+        body: const Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -34,7 +39,7 @@ class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
                 child: Column(
                   children: [
                     Text(
-                      'Seja muito bem-vindo, Gabriel.',
+                      'Seja bem-vindo!',
                       style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 16),
@@ -50,18 +55,6 @@ class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
             ],
           ),
         ),
-      ),
-      title: "DiferLab",
-      routes: {
-        '/novaIdeia': (context) => TelaNovaIdeia(),
-        '/minhasIdeias': (context) => TelaMinhasIdeias(),
-        '/anotacoes': (context) => TelaAnotacoes(),
-        '/detalhes': (context) => TelaDetalhes(),
-        '/NovaAnotacao': (context) => TelaNovaAnotacao(),
-        '/recados': (context) => TelaPrincipalRecados(),
-        '/configuracoes': (context) => TelaConfiguracoes(),
-        '/login': (context) => TelaLogin(),
-      },
     );
   }
 

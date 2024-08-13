@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/servicos/AutenticacaoServico.dart';
 import 'package:navigator_project/telas/TelaCadastro.dart';
+import 'TelaDetalhes.dart';
 import 'TelaPrincipalRecados.dart';
+import 'package:navigator_project/telas/TelaConfiguracoes.dart';
+
+import 'package:navigator_project/telas/TelaMinhasIdeias.dart';
+import 'package:navigator_project/telas/TelaNovaAnotacao.dart';
+import 'package:navigator_project/telas/TelaNovaIdeia.dart';
+import 'TelaAnotacoes.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -11,14 +18,11 @@ class TelaLogin extends StatefulWidget {
 class _TelaLoginState extends State<TelaLogin> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final _formKey = GlobalKey<FormState>();
+  final _formKeyLogin = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'DiferLab',
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: const Color(0xFF242849),
         body: LayoutBuilder(
           builder: (context, constraints) {
@@ -28,7 +32,7 @@ class _TelaLoginState extends State<TelaLogin> {
               padding: const EdgeInsets.all(16.0),
               child: Center(
                 child: Form(
-                  key: _formKey,
+                  key: _formKeyLogin,
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -82,18 +86,13 @@ class _TelaLoginState extends State<TelaLogin> {
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
                           onPressed: () {
-                            if (_formKey.currentState!.validate()) {
+                            if (_formKeyLogin.currentState!.validate()) {
                               bool valido = AutenticacaoServico().conectarConta(
                                 email: _usernameController.text.toString(),
                                 senha: _passwordController.text.toString(),
                               );
                               if (valido) {
-                                Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                    builder: (context) => TelaPrincipalRecados(),
-                                  ),
-                                );
+                                Navigator.popAndPushNamed(context, '/recados',arguments: {'email':_usernameController.text.toString()});
                               } else {
                                 ScaffoldMessenger.of(context).showSnackBar(
                                   const SnackBar(
@@ -151,7 +150,7 @@ class _TelaLoginState extends State<TelaLogin> {
             );
           },
         ),
-      ),
+
     );
   }
 }

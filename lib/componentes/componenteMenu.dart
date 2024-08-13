@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:navigator_project/servicos/AutenticacaoServico.dart';
 
 class ComponenteMenu extends StatefulWidget {
+
   const ComponenteMenu({super.key});
 
   @override
@@ -10,10 +11,24 @@ class ComponenteMenu extends StatefulWidget {
 }
 
 class _ComponenteMenuState extends State<ComponenteMenu> {
+
+  late String email;
+
+  @override
+  void initState() {
+    super.initState();
+
+    Future.delayed(Duration.zero, () {
+      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+      setState(() {
+        email = arguments['email'];
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Drawer(
-      //backgroundColor: Colors.black,
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
@@ -48,7 +63,7 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
             leading: Icon(Icons.note_rounded),
             title: Text('Anotações'),
             onTap: () {
-              Navigator.pushNamed(context, '/anotacoes');
+              Navigator.pushNamed(context, '/anotacoes',arguments: {'email':email});
             },
           ),
           ListTile(
@@ -63,7 +78,7 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
             title: Text('Sair'),
             onTap: () {
               AutenticacaoServico().sairDaConta();
-              Navigator.popAndPushNamed(context, '/login');
+              Navigator.popAndPushNamed(context, '/');
             },
           ),
         ],

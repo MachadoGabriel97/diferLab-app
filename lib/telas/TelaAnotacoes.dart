@@ -29,13 +29,13 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ComponenteAppBar(tituloComponente: "Anotações",usuarioLogado: "Gabriel"),
+      appBar: ComponenteAppBar(tituloComponente: "Anotações",usuarioLogado: email),
       drawer: ComponenteMenu(),
       body:  SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            ComponenteListaAnotacoes(usuarioEmail: "gabrielmachadodasilva97@gmail.com")
+            ComponenteListaAnotacoes(usuarioEmail: email)
           ],
         ),
       ),
