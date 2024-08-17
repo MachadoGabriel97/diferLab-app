@@ -7,16 +7,29 @@ class TelaDetalhes extends StatefulWidget {
 }
 
 class _TelaDetalhesState extends State<TelaDetalhes> {
+
+  late String? email='';
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+      setState(() {
+        email = arguments['email'];
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
 
     return Scaffold(
-      drawer: ComponenteMenu(),
+      drawer: ComponenteMenu(email: email,),
       appBar: AppBar(
-        title: Text('Detalhes'),
+        title: const Text('Detalhes'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -28,28 +41,28 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
           children: [
             TextFormField(
               initialValue: arguments['title'],
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Título',
               ),
               readOnly: true,
             ),
             TextFormField(
               initialValue: arguments['date'],
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Data Sugestão',
               ),
               readOnly: true,
             ),
             TextFormField(
               initialValue: arguments['status'],
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Situação',
               ),
               readOnly: true,
             ),
             TextFormField(
               initialValue: arguments['description'],
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Descrição',
               ),
               readOnly: true,
@@ -57,7 +70,7 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
             ),
             TextFormField(
               initialValue: arguments['proposal'],
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Solução Proposta',
               ),
               readOnly: true,
@@ -65,7 +78,7 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
             ),
             TextFormField(
               initialValue: arguments['benefits'],
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Benefícios de implementação',
               ),
               readOnly: true,
@@ -73,7 +86,7 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
             ),
             TextFormField(
               initialValue: arguments['feedback'],
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Feedback Recebido',
               ),
               readOnly: true,
@@ -83,7 +96,7 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},elevation: 10, child: Icon(Icons.chat, color: Colors.indigo,),
+        onPressed: (){},elevation: 10, child: const Icon(Icons.chat, color: Colors.indigo,),
         hoverColor: Colors.indigoAccent,
         tooltip: "Ver acompanhamentos",
       ),
