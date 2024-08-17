@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteEditText.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
+import 'package:navigator_project/telas/ImageUploader.dart';
 
 enum Sexo {Masculino, Feminino}
 
@@ -14,7 +15,7 @@ class TelaConfiguracoes extends StatefulWidget {
 
 class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
 
-  late String? email;
+  late String? email='';
   @override
   void initState() {
     super.initState();
@@ -42,9 +43,15 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
         child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const CircleAvatar(
-                      backgroundImage: AssetImage("imagens/cadastro_usuario.png"),
-                      maxRadius: 100
+                  //todo: criar logica para image picker e carregar imagem pro firebase storage
+                  GestureDetector(
+                    onTap: (){
+                      Navigator.pushReplacementNamed(context, '/imageupload',arguments: {'email':email});
+                    },
+                    child: const CircleAvatar(
+                        backgroundImage: AssetImage("imagens/cadastro_usuario.png"),
+                        maxRadius: 100
+                    ),
                   ),
                   ComponenteEditText(
                     textoLabel: "Colaborador",
