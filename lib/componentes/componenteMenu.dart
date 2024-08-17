@@ -26,7 +26,6 @@ class ComponenteMenu extends StatelessWidget {
             title: const Text('Recados'),
             onTap: () {
               Navigator.pushReplacementNamed(context, '/recados',arguments: {'email':email});
-
             },
           ),
           ListTile(
