@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/telas/ImageUploader.dart';
 import 'package:navigator_project/telas/TelaLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:navigator_project/telas/TelaRecuperarSenha.dart';
@@ -31,6 +32,7 @@ void main() async {
           '/recados': (context) => TelaPrincipalRecados(),
           '/configuracoes': (context) => TelaConfiguracoes(),
           '/recuperarSenha': (context) => TelaRecuperarSenha(),
+          '/imageupload': (context) => ImageUploader(),
         },
           theme: ThemeData(
             primarySwatch: Colors.blue,
