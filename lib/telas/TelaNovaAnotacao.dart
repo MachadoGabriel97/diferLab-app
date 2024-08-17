@@ -40,9 +40,9 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const ComponenteMenu(),
-      appBar: const ComponenteAppBar(
-          tituloComponente: "Nova Anotação", usuarioLogado: "Gabriel"),
+      drawer: ComponenteMenu(email: email,),
+      appBar:  ComponenteAppBar(
+          tituloComponente: "Nova Anotação", usuarioLogado: email),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(

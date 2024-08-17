@@ -2,29 +2,9 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/servicos/AutenticacaoServico.dart';
 
-class ComponenteMenu extends StatefulWidget {
-
-  const ComponenteMenu({super.key});
-
-  @override
-  State<ComponenteMenu> createState() => _ComponenteMenuState();
-}
-
-class _ComponenteMenuState extends State<ComponenteMenu> {
-
-  late String email;
-
-  @override
-  void initState() {
-    super.initState();
-
-    Future.delayed(Duration.zero, () {
-      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
-      setState(() {
-        email = arguments['email'];
-      });
-    });
-  }
+class ComponenteMenu extends StatelessWidget {
+  final String? email;
+  const ComponenteMenu({super.key,required this.email});
 
   @override
   Widget build(BuildContext context) {
@@ -33,49 +13,53 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
         padding: EdgeInsets.zero,
         children: <Widget>[
           DrawerHeader(
-            child: Image.asset("imagens/logo.png"),
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.blue,
             ),
+            child: Image.asset("imagens/logo.png"),
+          ),
+          Center(
+            child: Text(email!),
           ),
           ListTile(
-            leading: Icon(Icons.mark_unread_chat_alt_outlined),
-            title: Text('Recados'),
+            leading: const Icon(Icons.mark_unread_chat_alt_outlined),
+            title: const Text('Recados'),
             onTap: () {
-              Navigator.pushNamed(context, '/recados');
+              Navigator.pushReplacementNamed(context, '/recados',arguments: {'email':email});
+
             },
           ),
           ListTile(
-            leading: Icon(Icons.lightbulb_outline),
-            title: Text('Nova Ideia'),
+            leading: const Icon(Icons.lightbulb_outline),
+            title: const Text('Nova Ideia'),
             onTap: () {
-              Navigator.pushNamed(context, '/novaIdeia');
+              Navigator.pushReplacementNamed(context, '/novaIdeia',arguments: {'email':email});
             },
           ),
           ListTile(
-            leading: Icon(Icons.list),
-            title: Text('Minhas Ideias'),
+            leading: const Icon(Icons.list),
+            title: const Text('Minhas Ideias'),
             onTap: () {
-              Navigator.pushNamed(context, '/minhasIdeias');
+              Navigator.pushReplacementNamed(context, '/minhasIdeias',arguments: {'email':email});
             },
           ),
           ListTile(
-            leading: Icon(Icons.note_rounded),
-            title: Text('Anotações'),
+            leading: const Icon(Icons.note_rounded),
+            title: const Text('Anotações'),
             onTap: () {
-              Navigator.pushNamed(context, '/anotacoes',arguments: {'email':email});
+              Navigator.pushReplacementNamed(context, '/anotacoes',arguments: {'email':email});
             },
           ),
           ListTile(
-            leading: Icon(Icons.settings),
-            title: Text('Configurações'),
+            leading: const Icon(Icons.settings),
+            title: const Text('Configurações'),
             onTap: () {
-              Navigator.pushNamed(context, '/configuracoes');
+              Navigator.pushReplacementNamed(context, '/configuracoes',arguments: {'email':email});
             },
           ),
           ListTile(
-            leading: Icon(Icons.exit_to_app),
-            title: Text('Sair'),
+            leading: const Icon(Icons.exit_to_app),
+            title: const Text('Sair'),
             onTap: () {
               AutenticacaoServico().sairDaConta();
               Navigator.popAndPushNamed(context, '/');
@@ -86,3 +70,6 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
     );
   }
 }
+
+
+

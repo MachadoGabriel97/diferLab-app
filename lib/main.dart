@@ -8,31 +8,34 @@ import 'telas/TelaDetalhes.dart';
 import 'telas/TelaMinhasIdeias.dart';
 import 'telas/TelaNovaAnotacao.dart';
 import 'telas/TelaNovaIdeia.dart';
-import 'telas/TelaPrincipalRecados.dart';
+import 'telas/TelaRecados.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized(); // Inicializa o binding do Flutter
+  WidgetsFlutterBinding.ensureInitialized(); // Inicializa Flutter
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  runApp(MaterialApp(
-    initialRoute: '/',
-    routes: {
-      '/': (context) => TelaLogin(),
-      '/novaIdeia': (context) => TelaNovaIdeia(),
-      '/minhasIdeias': (context) => TelaMinhasIdeias(),
-      '/anotacoes': (context) => TelaAnotacoes(),
-      '/detalhes': (context) => TelaDetalhes(),
-      '/NovaAnotacao': (context) => TelaNovaAnotacao(),
-      '/recados': (context) => TelaPrincipalRecados(),
-      '/configuracoes': (context) => TelaConfiguracoes(),
+  runApp(
+      MaterialApp(
+        initialRoute: '/',
+        title: 'DiferLab',
+        debugShowCheckedModeBanner: false,
+        routes: {
+          '/': (context) => TelaLogin(),
+          '/novaIdeia': (context) => TelaNovaIdeia(),
+          '/minhasIdeias': (context) => TelaMinhasIdeias(),
+          '/anotacoes': (context) => TelaAnotacoes(),
+          '/detalhes': (context) => TelaDetalhes(),
+          '/NovaAnotacao': (context) => TelaNovaAnotacao(),
+          '/recados': (context) => TelaPrincipalRecados(),
+          '/configuracoes': (context) => TelaConfiguracoes(),
 
-    },
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-
-  ));
+        },
+          theme: ThemeData(
+            primarySwatch: Colors.blue,
+          ),
+      )
+  );
 }
 
 

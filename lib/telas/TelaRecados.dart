@@ -12,7 +12,7 @@ class TelaPrincipalRecados extends StatefulWidget {
 }
 
 class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
-  late String email;
+  late String email='';
 
   @override
   void initState() {
@@ -27,7 +27,7 @@ class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
   @override
   Widget build(BuildContext context) {
     return   Scaffold(
-        drawer:  const ComponenteMenu(),
+        drawer:   ComponenteMenu(email: email,),
         appBar: ComponenteAppBar(
           tituloComponente: "Recados", usuarioLogado: email,),
         body: const Padding(

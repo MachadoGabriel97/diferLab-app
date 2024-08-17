@@ -9,24 +9,30 @@ class AutenticacaoServico {
     required String email,
     required String senha,
   }) {
-    firebaseAuth.createUserWithEmailAndPassword(email: email, password: senha);
-
+    try {
+      Future<UserCredential> user = firebaseAuth.createUserWithEmailAndPassword(
+          email: email, password: senha);
+    print(user.toString());
+    }catch(e){
+      print(e.toString());
+    }
   }
 
-  bool conectarConta({
+  Future<bool> conectarConta({
     required String email,
     required String senha,
-  }) {
-    /// usuario teste - admin@diferlab.com.br
-    /// senha: QWas12@#
-    Future<UserCredential> credencialUsuario =
-        firebaseAuth.signInWithEmailAndPassword(email: email, password: senha);
-    User? usuario = firebaseAuth.currentUser;
+  }) async {
     try {
+      UserCredential credencialUsuario = await firebaseAuth.signInWithEmailAndPassword(email: email, password: senha);
+      print(credencialUsuario.user);
+      print(credencialUsuario.credential);
+
+      User? usuario = firebaseAuth.currentUser;
+
       if (usuario != null) {
-        print("retorno:${credencialUsuario.hashCode.toString()}");
-        print("USER:${credencialUsuario}");
-        print("email:${firebaseAuth.currentUser?.email.toString()}");
+        print("retorno: ${credencialUsuario.hashCode.toString()}");
+        print("USER: ${credencialUsuario}");
+        print("email: ${firebaseAuth.currentUser?.email.toString()}");
         return true;
       }
     } catch (e) {
@@ -36,7 +42,17 @@ class AutenticacaoServico {
     return false;
   }
 
+  void enviarEmailRecuperacaoConta(String email){
+    try{
+      firebaseAuth.sendPasswordResetEmail(email: email);
+    }catch(e){
+      print(e.toString());
+    }
+
+  }
+
   void sairDaConta() {
+    print('saindo da conta');
     firebaseAuth.signOut();
   }
 }

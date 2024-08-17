@@ -1,14 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/servicos/AutenticacaoServico.dart';
 import 'package:navigator_project/telas/TelaCadastro.dart';
-import 'TelaDetalhes.dart';
-import 'TelaPrincipalRecados.dart';
-import 'package:navigator_project/telas/TelaConfiguracoes.dart';
+import 'package:navigator_project/telas/TelaRecuperarSenha.dart';
 
-import 'package:navigator_project/telas/TelaMinhasIdeias.dart';
-import 'package:navigator_project/telas/TelaNovaAnotacao.dart';
-import 'package:navigator_project/telas/TelaNovaIdeia.dart';
-import 'TelaAnotacoes.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -46,7 +40,8 @@ class _TelaLoginState extends State<TelaLogin> {
                         child: TextFormField(
                           controller: _usernameController,
                           decoration: const InputDecoration(
-                            labelText: 'Usuário',
+                            labelText: 'E-mail',
+                            hintText: 'seuemail.aqui@dominio.com',
                             filled: true,
                             fillColor: Colors.white,
                           ),
@@ -85,12 +80,10 @@ class _TelaLoginState extends State<TelaLogin> {
                             backgroundColor: const Color(0xFF5C6BC0),
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
                             if (_formKeyLogin.currentState!.validate()) {
-                              bool valido = AutenticacaoServico().conectarConta(
-                                email: _usernameController.text.toString(),
-                                senha: _passwordController.text.toString(),
-                              );
+                             bool valido = await AutenticacaoServico().conectarConta(email: _usernameController.text, senha: _passwordController.text);
+
                               if (valido) {
                                 Navigator.popAndPushNamed(context, '/recados',arguments: {'email':_usernameController.text.toString()});
                               } else {
@@ -122,7 +115,7 @@ class _TelaLoginState extends State<TelaLogin> {
                         width: width,
                         child: ElevatedButton.icon(
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF03A9F4),
+                            backgroundColor: const Color(0xFF8b7900),
                             padding: const EdgeInsets.symmetric(vertical: 16),
                           ),
                           onPressed: () {
@@ -139,6 +132,32 @@ class _TelaLoginState extends State<TelaLogin> {
                           ),
                           label: const Text(
                             'Cadastrar Conta',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(height: 10),
+                      SizedBox(
+                        width: width,
+                        child: ElevatedButton.icon(
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFF03A9F4),
+                            padding: const EdgeInsets.symmetric(vertical: 16),
+                          ),
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => TelaRecuperarSenha(),
+                              ),
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.password,
+                            color: Colors.white,
+                          ),
+                          label: const Text(
+                            'Esqueceu sua senha ? Clique aqui para resetar',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),

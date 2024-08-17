@@ -13,7 +13,7 @@ class TelaAnotacoes extends StatefulWidget {
 
 
 class _TelaAnotacoesState extends State<TelaAnotacoes> {
-  late String email;
+  late String email='';
   @override
   void initState() {
     super.initState();
@@ -30,7 +30,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: ComponenteAppBar(tituloComponente: "Anotações",usuarioLogado: email),
-      drawer: ComponenteMenu(),
+      drawer: ComponenteMenu(email: email,),
       body:  SingleChildScrollView(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -41,7 +41,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-               Navigator.pushNamed(context, "/NovaAnotacao");
+               Navigator.pushReplacementNamed(context, "/NovaAnotacao",arguments: {'email':email});
             },
         child: Icon(Icons.note_add,) ,
         tooltip: "Nova anotação",

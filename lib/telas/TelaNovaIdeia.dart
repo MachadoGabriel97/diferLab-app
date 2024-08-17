@@ -2,23 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 
-enum TermoLgdp {Concordo, Discordo}
 
 class TelaNovaIdeia extends StatefulWidget {
-  const TelaNovaIdeia({super.key});
+  TelaNovaIdeia({super.key});
 
   @override
   State<TelaNovaIdeia> createState() => _TelaNovaIdeiaState();
 }
 
 class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
-  TermoLgdp? selecaoTermo;
+  bool? selecao_termo;
+  late String? email='';
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+      setState(() {
+        email = arguments['email'];
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer:const ComponenteMenu(),
-      appBar:  const ComponenteAppBar(tituloComponente: "Nova Ideia",usuarioLogado: "Gabriel"),
+      drawer:  ComponenteMenu(email: email,),
+      appBar:   ComponenteAppBar(tituloComponente: "Nova Ideia",usuarioLogado: email ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -68,23 +78,23 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                       Text("Aceite do Termo:"),
                     ],
                   ),
-                  RadioListTile<TermoLgdp>(
+                  RadioListTile<bool>(
                     title: const Text("Concordo"),
-                    value: TermoLgdp.Concordo,
-                    groupValue: selecaoTermo,
-                    onChanged: (TermoLgdp? valor_selecionado) {
+                    value: true,
+                    groupValue: selecao_termo,
+                    onChanged: (bool? valor_selecionado) {
                       setState(() {
-                        selecaoTermo = valor_selecionado;
+                        selecao_termo = valor_selecionado;
                       });
                     },
                   ),
-                  RadioListTile<TermoLgdp>(
+                  RadioListTile<bool>(
                     title: const Text("Discordo"),
-                    value: TermoLgdp.Discordo,
-                    groupValue: selecaoTermo,
-                    onChanged: (TermoLgdp? valor_selecionado) {
+                    value: false,
+                    groupValue: selecao_termo,
+                    onChanged: (bool? valor_selecionado) {
                       setState(() {
-                        selecaoTermo = valor_selecionado;
+                        selecao_termo = valor_selecionado;
                       });
                     },
                   ),
@@ -92,6 +102,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                 ],
               ),
               const SizedBox(height: 16),
+              //Todo: implementar logica para cadastrar a nova ideia.
               ElevatedButton(
                 onPressed: () {},
                 child: const Text('Salvar'),

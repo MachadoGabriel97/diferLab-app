@@ -13,6 +13,19 @@ class TelaConfiguracoes extends StatefulWidget {
 }
 
 class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
+
+  late String? email;
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+      setState(() {
+        email = arguments['email'];
+      });
+    });
+  }
+
   Sexo? sexo_informado;
   TextEditingController controleNomeColaborador = TextEditingController();
   TextEditingController controleNomeGestor = TextEditingController();
@@ -22,8 +35,8 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const ComponenteMenu(),
-      appBar: ComponenteAppBar(tituloComponente: "Configurações",usuarioLogado: "Gabriel"),
+      drawer: ComponenteMenu(email: email,),
+      appBar: ComponenteAppBar(tituloComponente: "Configurações",usuarioLogado: email),
       body: Container(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
@@ -32,7 +45,6 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                   const CircleAvatar(
                       backgroundImage: AssetImage("imagens/cadastro_usuario.png"),
                       maxRadius: 100
-
                   ),
                   ComponenteEditText(
                     textoLabel: "Colaborador",
@@ -94,6 +106,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                       onPressed: () {
                         print(controleNomeColaborador.value.text);
                         print(sexo_informado.toString());
+                        //todo:Criar logica para salvar/atualizar as configurações do projeto
                         ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
                           backgroundColor: Colors.lightGreen,
                           showCloseIcon: true,

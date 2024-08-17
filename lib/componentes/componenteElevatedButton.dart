@@ -23,7 +23,7 @@ class ComponenteElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: this.corDoBotao, // Cor do botão
-        padding: EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.symmetric(vertical: 16),
       ),
       onPressed: () {
         this.funcao();
@@ -32,13 +32,10 @@ class ComponenteElevatedButton extends StatelessWidget {
           ScaffoldMessenger.of(context).showSnackBar( SnackBar(
             backgroundColor: Colors.green,
             showCloseIcon: false,
-            duration: Duration(seconds: 10),
+            duration: const Duration(seconds: 5),
             content:  Text(
                 mensagem_snackbar),
-
           ));
-
-
         }
         if(this.fechaTela){
           Navigator.pop(context);

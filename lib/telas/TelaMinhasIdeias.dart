@@ -9,96 +9,114 @@ class TelaMinhasIdeias extends StatefulWidget {
 }
 
 class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
+  late String? email='';
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(Duration.zero, () {
+      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+      setState(() {
+        email = arguments['email'];
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      appBar:  const ComponenteAppBar(tituloComponente: "Minhas Ideias",usuarioLogado: "Gabriel"),
-      drawer: const ComponenteMenu(),
+      appBar:   ComponenteAppBar(tituloComponente: "Minhas Ideias",usuarioLogado: email),
+      drawer:  ComponenteMenu(email: email,),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            // Filtros
-            Row(
-              children: [
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Column(
-                        children: [
-                          Text('Data da Sugestão:', style: TextStyle(fontWeight: FontWeight.bold)),
-
-                          TextFormField(
-                            decoration: InputDecoration(
-                                labelText: 'Início',
-                                suffixIcon: Icon(Icons.calendar_today)),
-                          ),
-
-                          SizedBox(width: 16),
-                          TextFormField(
-                            decoration: InputDecoration(
-                                labelText: 'Fim',
-                                suffixIcon: Icon(Icons.calendar_today)),
-                          ),
-                          SizedBox(width: 16),
-                          DropdownButtonFormField<String>(
-                            decoration: InputDecoration(labelText: 'Selecione uma situação'),
-                            items: [
-                              DropdownMenuItem(value: null, child: Text('Não Filtrar')),
-                              DropdownMenuItem(value: 'analise', child: Text('Análise')),
-                              DropdownMenuItem(value: 'aprovado', child: Text('Aprovado')),
-                              DropdownMenuItem(value: 'rejeitado', child: Text('Rejeitado')),
-                            ],
-                            onChanged: (value) {},
-                          )
-                        ],
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-            SizedBox(height: 16),
-            // Tabela de Ideias
-            Expanded(
-              child: ListView(
-                children: [
-                  DataTable(
-                    columns: [
-                      DataColumn(label: Text('Título')),
-                      DataColumn(label: Text('Data Sugestão')),
-                      DataColumn(label: Text('Situação')),
-                      DataColumn(label: Text('Detalhes')),
-                    ],
-                    rows: [
-                      DataRow(cells: [
-                        DataCell(Text('teste melhoria em algo')),
-                        DataCell(Text('20/07/2024')),
-                        DataCell(Text('Análise')),
-                        DataCell(IconButton(
-                          icon: Icon(Icons.search),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/detalhes', arguments: {
-                              'title': 'teste melhoria em algo',
-                              'date': '20/07/2024',
-                              'status': 'Análise',
-                              'description': 'Descrição detalhada da ideia.',
-                              'proposal': 'Proposta da ideia.',
-                              'benefits': 'Benefícios da implementação.',
-                              'feedback': 'Feedback recebido.',
-                            });
-                          },
-                        )),
-                      ]),
-                    ],
-                  ),
-                ],
-              ),
-            ),
+            carregar_filtros(),
+            carregar_tabela(),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget carregar_filtros() {
+    return Row(
+      children: [
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 16),
+              Column(
+                children: [
+                  const Text('Data da Sugestão:', style: TextStyle(fontWeight: FontWeight.bold)),
+
+                  TextFormField(
+                    decoration: const InputDecoration(
+                        labelText: 'Início',
+                        suffixIcon: Icon(Icons.calendar_today)),
+                  ),
+
+                  const SizedBox(width: 16),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                        labelText: 'Fim',
+                        suffixIcon: Icon(Icons.calendar_today)),
+                  ),
+                  const SizedBox(width: 16),
+                  DropdownButtonFormField<String>(
+                    decoration: const InputDecoration(labelText: 'Selecione uma situação'),
+                    items: const [
+                      DropdownMenuItem(value: null, child: Text('Não Filtrar')),
+                      DropdownMenuItem(value: 'analise', child: Text('Análise')),
+                      DropdownMenuItem(value: 'aprovado', child: Text('Aprovado')),
+                      DropdownMenuItem(value: 'rejeitado', child: Text('Rejeitado')),
+                    ],
+                    onChanged: (value) {},
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget carregar_tabela() {
+    return  Expanded(
+      child: ListView(
+        children: [
+          DataTable(
+            columns: [
+              const DataColumn(label: Text('Título')),
+              const DataColumn(label: Text('Data Sugestão')),
+              const DataColumn(label: Text('Situação')),
+              const DataColumn(label: Text('Detalhes')),
+            ],
+            rows: [
+              DataRow(cells: [
+                const DataCell(Text('teste melhoria em algo')),
+                const DataCell(Text('20/07/2024')),
+                const DataCell(Text('Análise')),
+                DataCell(IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/detalhes', arguments: {
+                      'title': 'teste melhoria em algo',
+                      'date': '20/07/2024',
+                      'status': 'Análise',
+                      'description': 'Descrição detalhada da ideia.',
+                      'proposal': 'Proposta da ideia.',
+                      'benefits': 'Benefícios da implementação.',
+                      'feedback': 'Feedback recebido.',
+                    });
+                  },
+                )),
+              ]),
+            ],
+          ),
+        ],
       ),
     );
   }
