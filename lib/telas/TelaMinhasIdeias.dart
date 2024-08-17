@@ -94,6 +94,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
               const DataColumn(label: Text('Situação')),
               const DataColumn(label: Text('Detalhes')),
             ],
+            //todo: implementar logica para carregar as idéias de acordo com o usuário logado
             rows: [
               DataRow(cells: [
                 const DataCell(Text('teste melhoria em algo')),
