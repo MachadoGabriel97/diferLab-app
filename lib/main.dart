@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/telas/TelaLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:navigator_project/telas/TelaRecuperarSenha.dart';
 import 'firebase_options.dart';
 import 'telas/TelaAnotacoes.dart';
 import 'telas/TelaConfiguracoes.dart';
@@ -29,7 +30,7 @@ void main() async {
           '/NovaAnotacao': (context) => TelaNovaAnotacao(),
           '/recados': (context) => TelaPrincipalRecados(),
           '/configuracoes': (context) => TelaConfiguracoes(),
-
+          '/recuperarSenha': (context) => TelaRecuperarSenha(),
         },
           theme: ThemeData(
             primarySwatch: Colors.blue,
