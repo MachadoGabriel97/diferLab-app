@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
+import 'package:navigator_project/servicos/CadastroIdeiasServico.dart';
 
 
 class TelaNovaIdeia extends StatefulWidget {
@@ -11,15 +13,19 @@ class TelaNovaIdeia extends StatefulWidget {
 }
 
 class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
-  bool? selecao_termo;
-  late String? email='';
+  TextEditingController _controllerTitulo = TextEditingController();
+  TextEditingController _controllerDescricao = TextEditingController();
+  TextEditingController _controllerSolucao = TextEditingController();
+  TextEditingController _controllerBeneficios = TextEditingController();
+  bool? selecao_termo = false;
+  late String? _email='';
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
       final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
       setState(() {
-        email = arguments['email'];
+        _email = arguments['email'];
       });
     });
   }
@@ -27,8 +33,8 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer:  ComponenteMenu(email: email,),
-      appBar:   ComponenteAppBar(tituloComponente: "Nova Ideia",usuarioLogado: email ),
+      drawer:  ComponenteMenu(email: _email,),
+      appBar:   ComponenteAppBar(tituloComponente: "Nova Ideia",usuarioLogado: _email ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -38,6 +44,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                 decoration: const InputDecoration(
                   labelText: 'Título',
                 ),
+                controller: _controllerTitulo,
                 maxLength: 30,
               ),
               TextFormField(
@@ -45,6 +52,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                   labelText: 'Descrição (Problema ou melhoria)',
                 ),
                 maxLength: 200,
+                controller: _controllerDescricao,
                 maxLines: 3,
               ),
               TextFormField(
@@ -52,6 +60,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                   labelText: 'Solução Proposta',
                 ),
                 maxLength: 200,
+                controller: _controllerSolucao,
                 maxLines: 3,
               ),
               TextFormField(
@@ -59,6 +68,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                   labelText: 'Benefícios de implementação',
                 ),
                 maxLength: 200,
+                controller: _controllerBeneficios,
                 maxLines: 3,
               ),
               const SizedBox(height: 16),
@@ -102,10 +112,29 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                 ],
               ),
               const SizedBox(height: 16),
-              //Todo: implementar logica para cadastrar a nova ideia.
               ElevatedButton(
-                onPressed: () {},
-                child: const Text('Salvar'),
+                onPressed: () {
+                  CadastroIdeiaServico(
+                      titulo: _controllerTitulo.text,
+                      descricao: _controllerDescricao.text,
+                      solucao_proposta: _controllerSolucao.text,
+                      beneficios: _controllerBeneficios.text,
+                      aceitaTermoLgdp:  selecao_termo!,
+                      data_cadastro: DateTime.now(),
+                      usuario_email: _email!);
+                  ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
+                    backgroundColor: Colors.green,
+                    showCloseIcon: false,
+                    duration: const Duration(seconds: 5),
+                    content:  Text(
+                        'Cadastro realizado com sucesso!'),
+                  ));
+                  Navigator.pushReplacementNamed(context, '/minhasIdeias');
+                },
+                style: const ButtonStyle(
+                  backgroundColor:  WidgetStatePropertyAll(Colors.blue),
+                ),
+                child: const Text('Salvar', style: TextStyle(color: Colors.black),),
               ),
             ],
           ),
