@@ -44,7 +44,8 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
                Navigator.pushReplacementNamed(context, "/NovaAnotacao",arguments: {'email':email});
             },
         tooltip: "Nova anotação",
-        child: const Icon(Icons.note_add,) ,
+        backgroundColor: Colors.blueAccent,
+        child: const Icon(Icons.note_add,color: Colors.white,) ,
       ),
     );
   }
