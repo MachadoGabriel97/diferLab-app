@@ -14,7 +14,7 @@ class ComponenteMenu extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             decoration: const BoxDecoration(
-              color: Colors.blue,
+              color: Color(0xFF242849),
             ),
             child: Image.asset("imagens/logo.png"),
           ),
@@ -49,6 +49,7 @@ class ComponenteMenu extends StatelessWidget {
               Navigator.pushReplacementNamed(context, '/anotacoes',arguments: {'email':email});
             },
           ),
+          Divider(color: Colors.black,),
           ListTile(
             leading: const Icon(Icons.settings),
             title: const Text('Configurações'),
