@@ -129,7 +129,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                     content:  Text(
                         'Cadastro realizado com sucesso!'),
                   ));
-                  Navigator.pushReplacementNamed(context, '/minhasIdeias');
+                  Navigator.pushReplacementNamed(context, '/minhasIdeias',arguments: {'email':_email});
                 },
                 style: const ButtonStyle(
                   backgroundColor:  WidgetStatePropertyAll(Colors.blue),
