@@ -4,21 +4,21 @@ class ImageService {
   // Método estático para buscar a URL da imagem pelo email
   static Future<String?> pesquisarUrlDoAvatarPorEmail(String email) async {
     try {
-      // Consulta à coleção avatar_usuarios onde o campo 'email' corresponde ao email fornecido
-      print('email:$email');
-      String imageUrl='nourl';
+      // Log do email a ser pesquisado
+      //print('Pesquisando URL para o email: $email');
+      String imageUrl = 'nourl';
       QuerySnapshot querySnapshot = await FirebaseFirestore.instance
           .collection('avatar_usuarios')
           .where('email', isEqualTo: email)
-          .get();
-
+          .get(
+      );
       if (querySnapshot.docs.isNotEmpty) {
-        // Supondo que a URL da imagem esteja armazenada no campo 'url'
+        // Log do documento encontrado
+        //print('Documento encontrado: ${querySnapshot.docs.first.data()}');
         imageUrl = querySnapshot.docs.first.get('url');
         return imageUrl;
       } else {
-        print(imageUrl);
-        print('Nenhum documento encontrado para o email fornecido.');
+        //print('Nenhum documento encontrado para o email fornecido.');
         return null;
       }
     } catch (e) {
