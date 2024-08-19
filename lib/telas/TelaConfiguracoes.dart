@@ -48,9 +48,10 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                     onTap: (){
                       Navigator.pushReplacementNamed(context, '/imageupload',arguments: {'email':email});
                     },
+                    //Todo: adicionar logica para buscar a imagem do perfil do usuario
                     child: const CircleAvatar(
-                        backgroundImage: AssetImage("imagens/cadastro_usuario.png"),
-                        maxRadius: 100
+                        foregroundImage: NetworkImage('https://firebasestorage.googleapis.com/v0/b/diferlab-7aa9f.appspot.com/o/avatar_usuarios%2Fgabrielmachadodasilva97%40gmail.com.png?alt=media&token=4ef9c7be-dd33-46d4-aad6-e5d16339edaf'),
+                        maxRadius: 50,
                     ),
                   ),
                   ComponenteEditText(
