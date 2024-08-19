@@ -82,7 +82,7 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
                        usuario_email: email,
                    );
                    //fecha tela e abre a tela inicial
-                   Navigator.popAndPushNamed(context, '/anotacoes');
+                   Navigator.pushReplacementNamed(context, '/anotacoes',arguments: {'email': email});
                   }
                 },
               ),
