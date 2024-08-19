@@ -56,7 +56,7 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
             TextFormField(
               initialValue: arguments['status'],
               decoration: const InputDecoration(
-                labelText: 'Situação',
+                labelText: 'Status',
               ),
               readOnly: true,
             ),
@@ -96,7 +96,8 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: (){},elevation: 10, child: const Icon(Icons.chat, color: Colors.indigo,),
+        backgroundColor: Colors.blueAccent,
+        onPressed: (){},elevation: 10, child: const Icon(Icons.chat, color: Colors.white,),
         hoverColor: Colors.indigoAccent,
         tooltip: "Ver acompanhamentos",
       ),
