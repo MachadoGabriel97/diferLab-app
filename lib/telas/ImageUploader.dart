@@ -75,15 +75,16 @@ class _ImageUploaderState extends State<ImageUploader> {
 
       if (kIsWeb) {
         // Web
-        fileName = '$email.jpg'; // Pode definir o nome conforme necessário
+        fileName = '$email.png'; // Pode definir o nome conforme necessário
         uploadTask = FirebaseStorage.instance
             .ref('avatar_usuarios/$fileName')
-            .putData(_webImage!);
+            .putData(_webImage!,SettableMetadata(contentType: 'image/png'));
       } else {
         // Mobile
         fileName = _imageFile!.path.split('/').last;
         Reference storageRef = FirebaseStorage.instance.ref().child('avatar_usuarios/$fileName');
-        uploadTask = storageRef.putFile(_imageFile!);
+        uploadTask = storageRef.putFile(_imageFile!,
+            SettableMetadata(contentType: 'image/jpeg'));
       }
 
       TaskSnapshot taskSnapshot = await uploadTask;
