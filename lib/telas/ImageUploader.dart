@@ -106,6 +106,12 @@ class _ImageUploaderState extends State<ImageUploader> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Upload de Imagem'),
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
       ),
       body: Center(
         child: Column(
