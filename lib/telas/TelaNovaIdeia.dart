@@ -13,10 +13,10 @@ class TelaNovaIdeia extends StatefulWidget {
 }
 
 class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
-  TextEditingController _controllerTitulo = TextEditingController();
-  TextEditingController _controllerDescricao = TextEditingController();
-  TextEditingController _controllerSolucao = TextEditingController();
-  TextEditingController _controllerBeneficios = TextEditingController();
+  final TextEditingController _controllerTitulo = TextEditingController();
+  final TextEditingController _controllerDescricao = TextEditingController();
+  final TextEditingController _controllerSolucao = TextEditingController();
+  final TextEditingController _controllerBeneficios = TextEditingController();
   bool? selecao_termo = false;
   late String? _email='';
   @override
@@ -125,7 +125,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                   ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
                     backgroundColor: Colors.green,
                     showCloseIcon: false,
-                    duration: const Duration(seconds: 5),
+                    duration:  Duration(seconds: 5),
                     content:  Text(
                         'Cadastro realizado com sucesso!'),
                   ));

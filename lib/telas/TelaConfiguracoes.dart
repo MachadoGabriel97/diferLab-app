@@ -4,7 +4,7 @@ import 'package:navigator_project/componentes/componenteEditText.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 import 'package:navigator_project/telas/ImageUploader.dart';
 
-enum Sexo {Masculino, Feminino}
+enum Sexo {masculino, feminino}
 
 class TelaConfiguracoes extends StatefulWidget {
   const TelaConfiguracoes({super.key});
@@ -86,7 +86,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                       ),
                       RadioListTile<Sexo>(
                         title: const Text("Masculino"),
-                        value: Sexo.Masculino,
+                        value: Sexo.masculino,
                         groupValue: sexo_informado,
                         onChanged: (Sexo? valor_selecionado) {
                           setState(() {
@@ -96,7 +96,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                       ),
                       RadioListTile<Sexo>(
                         title: const Text("Feminino"),
-                        value: Sexo.Feminino,
+                        value: Sexo.feminino,
                         groupValue: sexo_informado,
                         onChanged: (Sexo? valor_selecionado) {
                           setState(() {

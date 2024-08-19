@@ -22,11 +22,11 @@ class ComponenteElevatedButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
-        backgroundColor: this.corDoBotao, // Cor do botão
+        backgroundColor: corDoBotao, // Cor do botão
         padding: const EdgeInsets.symmetric(vertical: 16),
       ),
       onPressed: () {
-        this.funcao();
+        funcao();
 
         if (formKey.currentState!.validate()) {
           ScaffoldMessenger.of(context).showSnackBar( SnackBar(
@@ -37,11 +37,11 @@ class ComponenteElevatedButton extends StatelessWidget {
                 mensagem_snackbar),
           ));
         }
-        if(this.fechaTela){
+        if(fechaTela){
           Navigator.pop(context);
         }
       },
-      child: Text(this.tituloBotao, style: const TextStyle(color: Colors.white),),
+      child: Text(tituloBotao, style: const TextStyle(color: Colors.white),),
     );
   }
 }

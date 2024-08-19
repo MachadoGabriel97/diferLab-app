@@ -32,7 +32,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
       appBar: ComponenteAppBar(tituloComponente: "Anotações",usuarioLogado: email),
       drawer: ComponenteMenu(email: email,),
       body:  SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             ComponenteListaAnotacoes(usuarioEmail: email)
@@ -43,8 +43,8 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
         onPressed: () {
                Navigator.pushReplacementNamed(context, "/NovaAnotacao",arguments: {'email':email});
             },
-        child: Icon(Icons.note_add,) ,
         tooltip: "Nova anotação",
+        child: const Icon(Icons.note_add,) ,
       ),
     );
   }

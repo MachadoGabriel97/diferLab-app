@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 import '../componentes/componenteAppBar.dart';
-import 'TelaDetalhes.dart';
 
 class TelaMinhasIdeias extends StatefulWidget {
   @override
@@ -88,11 +87,11 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
       child: ListView(
         children: [
           DataTable(
-            columns: [
-              const DataColumn(label: Text('Título')),
-              const DataColumn(label: Text('Data Sugestão')),
-              const DataColumn(label: Text('Situação')),
-              const DataColumn(label: Text('Detalhes')),
+            columns: const [
+              DataColumn(label: Text('Título')),
+              DataColumn(label: Text('Data Sugestão')),
+              DataColumn(label: Text('Situação')),
+              DataColumn(label: Text('Detalhes')),
             ],
             //todo: implementar logica para carregar as idéias de acordo com o usuário logado
             rows: [

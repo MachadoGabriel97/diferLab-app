@@ -24,10 +24,10 @@ class CadastroAnotacaoServico {
 
   Map<String, dynamic> toMap() {
     return {
-      "titulo": this.titulo,
-      "descricao": this.descricao,
-      "data":this.data,
-      "usuario_email": this.usuario_email
+      "titulo": titulo,
+      "descricao": descricao,
+      "data":data,
+      "usuario_email": usuario_email
     };
   }
 

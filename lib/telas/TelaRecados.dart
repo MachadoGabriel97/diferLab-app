@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 import '../componentes/componenteAppBar.dart';
 import '../componentes/componenteMenu.dart';
-import 'TelaDetalhes.dart';
 
 class TelaPrincipalRecados extends StatefulWidget {
 

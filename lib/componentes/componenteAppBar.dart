@@ -16,7 +16,7 @@ class ComponenteAppBar extends StatefulWidget implements PreferredSizeWidget {
   State<ComponenteAppBar> createState() => _ComponenteAppBarState();
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class _ComponenteAppBarState extends State<ComponenteAppBar> {
@@ -46,12 +46,12 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
     return AppBar(
       title: Text(
         widget.tituloComponente,
-        style: TextStyle(color: Colors.white),
+        style: const TextStyle(color: Colors.white),
       ),
       centerTitle: true,
       actions: [
         Padding(
-          padding: EdgeInsets.all(10),
+          padding: const EdgeInsets.all(10),
           child: widget.usuarioLogado != null
               ? Row(
             children: [
@@ -59,11 +59,11 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
                 "${widget.usuarioLogado}",
                 style: const TextStyle(color: Colors.white, fontSize: 10),
               ),
-              SizedBox(width: 10), // Adiciona um espaçamento entre o texto e o CircleAvatar
+              const SizedBox(width: 10), // Adiciona um espaçamento entre o texto e o CircleAvatar
               CircleAvatar(
 
                 backgroundImage: _url == null
-                    ? AssetImage("imagens/cadastro_usuario.png") as ImageProvider
+                    ? const AssetImage("imagens/cadastro_usuario.png") as ImageProvider
                     : NetworkImage(_url.toString()),
               ),
             ],

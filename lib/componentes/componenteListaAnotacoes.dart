@@ -5,7 +5,7 @@ import 'package:intl/intl.dart';
 class ComponenteListaAnotacoes extends StatelessWidget {
   final String usuarioEmail;
 
-  ComponenteListaAnotacoes({required this.usuarioEmail});
+  const ComponenteListaAnotacoes({super.key, required this.usuarioEmail});
 
   @override
   Widget build(BuildContext context) {
@@ -14,11 +14,11 @@ class ComponenteListaAnotacoes extends StatelessWidget {
       builder: (BuildContext context,
           AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return Center(child: CircularProgressIndicator());
+          return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return Center(child: Text('Erro: ${snapshot.error}'));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Center(child: Text('Nenhuma anotação encontrada.'));
+          return const Center(child: Text('Nenhuma anotação encontrada.'));
         } else {
           final anotacoes = snapshot.data!;
           return ListView.builder(

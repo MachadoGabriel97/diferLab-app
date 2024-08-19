@@ -31,7 +31,7 @@ class AutenticacaoServico {
 
       if (usuario != null) {
         print("retorno: ${credencialUsuario.hashCode.toString()}");
-        print("USER: ${credencialUsuario}");
+        print("USER: $credencialUsuario");
         print("email: ${firebaseAuth.currentUser?.email.toString()}");
         return true;
       }

@@ -48,7 +48,7 @@ class _ImageUploaderState extends State<ImageUploader> {
 
   void pickImageWeb() async {
     html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
-    uploadInput.accept = 'avatares/*';
+    uploadInput.accept = 'avatar_usuarios/*';
     uploadInput.click();
 
     uploadInput.onChange.listen((e) {
@@ -104,7 +104,7 @@ class _ImageUploaderState extends State<ImageUploader> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Upload de Imagem'),
+        title: const Text('Upload de Imagem'),
       ),
       body: Center(
         child: Column(
@@ -114,21 +114,21 @@ class _ImageUploaderState extends State<ImageUploader> {
                 ? CircleAvatar(
               radius: 50,
               backgroundColor: Colors.grey[300],
-              child: Icon(Icons.person, size: 50),
+              child: const Icon(Icons.person, size: 50),
             )
                 : CircleAvatar(
               radius: 50,
               backgroundImage: NetworkImage(_imageUrl.toString()),
 
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: pickImage,
-              child: Text('Selecionar Imagem'),
+              child: const Text('Selecionar Imagem'),
             ),
             ElevatedButton(
               onPressed: uploadImage,
-              child: Text('Upload Imagem'),
+              child: const Text('Upload Imagem'),
             ),
           ],
         ),

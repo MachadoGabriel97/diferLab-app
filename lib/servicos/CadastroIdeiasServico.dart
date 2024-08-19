@@ -31,12 +31,12 @@ class CadastroIdeiaServico {
 
   Map<String, dynamic> toMap() {
     return {
-      "titulo": this.titulo,
-      "descricao": this.descricao,
-      "solucao_proposta": this.solucao_proposta,
-      "beneficios": this.beneficios,
-      "data_cadastro":this.data_cadastro,
-      "usuario_email": this.usuario_email
+      "titulo": titulo,
+      "descricao": descricao,
+      "solucao_proposta": solucao_proposta,
+      "beneficios": beneficios,
+      "data_cadastro":data_cadastro,
+      "usuario_email": usuario_email
     };
   }
 

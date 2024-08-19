@@ -13,13 +13,6 @@ class _TelaRecuperarSenhaState extends State<TelaRecuperarSenha> {
 
   final _formKey = GlobalKey<FormState>();
 
-  bool _validatePassword(String password) {
-    if (password.length < 8) return false;
-    if (!RegExp(r'[A-Za-z]').hasMatch(password)) return false;
-    if (!RegExp(r'[0-9]').hasMatch(password)) return false;
-    return true;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -38,13 +31,18 @@ class _TelaRecuperarSenhaState extends State<TelaRecuperarSenha> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    const SizedBox(
+                      height: 90,
+                      child: Text("Informe seu e-mail abaixo para lhe encaminharmos uma mensagem de recuperação de conta.",
+                      style: TextStyle(color: Colors.white,fontSize: 16),),
+                    ),
                     SizedBox(
                       width: width,
                       child: TextFormField(
                         controller: _emailController,
                         decoration: const InputDecoration(
                           labelText: 'E-mail',
-                          hintText: 'ex: mr.nobody@yahoo.com',
+                          hintText: 'ex: mr.nobody@gmail.com',
                           filled: true,
                           fillColor: Colors.white,
                         ),
