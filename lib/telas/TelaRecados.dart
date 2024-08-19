@@ -33,6 +33,7 @@ class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
           padding: EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Center(
                 child: Column(
