@@ -20,19 +20,30 @@ class ComponenteAppBar extends StatefulWidget implements PreferredSizeWidget {
 }
 
 class _ComponenteAppBarState extends State<ComponenteAppBar> {
-  String? _url; // Use String? para campos que podem ser nulos
+  String? _url;
 
   @override
   void initState() {
     super.initState();
-    if (widget.usuarioLogado != null) {
+    if (widget.usuarioLogado != null && widget.usuarioLogado.toString().isNotEmpty) {
+      print('Usuario logado: ${widget.usuarioLogado.toString()}');
+      buscaImagem();
+    }
+  }
+
+  @override
+  void didUpdateWidget(covariant ComponenteAppBar oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (oldWidget.usuarioLogado != widget.usuarioLogado) {
       buscaImagem();
     }
   }
 
   Future<void> buscaImagem() async {
     try {
-      String? url = await ImageService.pesquisarUrlDoAvatarPorEmail(widget.usuarioLogado.toString());
+      var url = await ImageService.pesquisarUrlDoAvatarPorEmail(widget.usuarioLogado.toString());
+      //print('url:$url');
+      //print('metodobusca imagem- email:${widget.usuarioLogado.toString()}');
       setState(() {
         _url = url;
       });
@@ -42,11 +53,14 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
   }
 
   @override
-  AppBar build(BuildContext context) {
+  Widget build(BuildContext context) {
     return AppBar(
       title: Text(
         widget.tituloComponente,
         style: const TextStyle(color: Colors.white),
+      ),
+      iconTheme: const IconThemeData(
+        color: Colors.white
       ),
       centerTitle: true,
       actions: [
@@ -59,19 +73,22 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
                 "${widget.usuarioLogado}",
                 style: const TextStyle(color: Colors.white, fontSize: 10),
               ),
-              const SizedBox(width: 10), // Adiciona um espaçamento entre o texto e o CircleAvatar
-              CircleAvatar(
-
-                backgroundImage: _url == null
-                    ? const AssetImage("imagens/cadastro_usuario.png") as ImageProvider
-                    : NetworkImage(_url.toString()),
+              const SizedBox(width: 20),
+              _url == null
+                  ? const CircleAvatar(
+                backgroundImage: AssetImage("imagens/cadastro_usuario.png"),
+              )
+                  :   CircleAvatar(
+                backgroundImage: NetworkImage(_url.toString()),
               ),
             ],
           )
               : Container(),
         ),
       ],
-      backgroundColor: Colors.blue,
+      backgroundColor: const Color(0xFF242849),
     );
   }
+
 }
+
