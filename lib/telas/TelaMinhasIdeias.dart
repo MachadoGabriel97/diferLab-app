@@ -30,7 +30,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            carregar_filtros(),
+            //carregar_filtros(),
             carregar_tabela(),
           ],
         ),
@@ -87,6 +87,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
       child: ListView(
         children: [
           DataTable(
+            //Define o cabeçalho da tabela
             columns: const [
               DataColumn(label: Text('Título')),
               DataColumn(label: Text('Data Sugestão')),
@@ -95,17 +96,36 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
             ],
             //todo: implementar logica para carregar as idéias de acordo com o e-mail do usuário logado
             rows: [
-              DataRow(cells: [
-                const DataCell(Text('teste melhoria em algo')),
-                const DataCell(Text('20/07/2024')),
-                const DataCell(Text('Análise')),
-                DataCell(IconButton(
+               DataRow(cells: [
+                const DataCell(Wrap(children: [Text('teste melhoria em algo')],)),
+                const DataCell(Wrap(children: [Text('20/07/2024')],)),
+                const DataCell(Wrap(children: [Text('Análise')],)),
+                DataCell( IconButton(
                   icon: const Icon(Icons.search),
                   onPressed: () {
                     Navigator.pushNamed(context, '/detalhes', arguments: {
                       'title': 'teste melhoria em algo',
                       'date': '20/07/2024',
                       'status': 'Análise',
+                      'description': 'Descrição detalhada da ideia.',
+                      'proposal': 'Proposta da ideia.',
+                      'benefits': 'Benefícios da implementação.',
+                      'feedback': 'Feedback recebido.',
+                    });
+                  },
+                )),
+              ]),
+              DataRow(cells: [
+                const DataCell(Wrap(children: [Text('teste 2 melhoria em algo')],)),
+                const DataCell(Wrap(children: [Text('21/07/2024')],)),
+                const DataCell(Wrap(children: [Text('Rejeitado')],)),
+                DataCell( IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/detalhes', arguments: {
+                      'title': 'teste 2 melhoria em algo',
+                      'date': '21/07/2024',
+                      'status': 'Rejeitado',
                       'description': 'Descrição detalhada da ideia.',
                       'proposal': 'Proposta da ideia.',
                       'benefits': 'Benefícios da implementação.',
