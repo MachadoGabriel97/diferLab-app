@@ -32,17 +32,54 @@ class ComponenteListaAnotacoes extends StatelessWidget {
               String dataFormatada =
                   DateFormat('dd/MM/yyyy HH:mm').format(dateTime);
 
-              return ListTile(
-                onTap: () {
-                  Navigator.popAndPushNamed(context, '/NovaAnotacao',
-                      arguments: {'titulo': anotacao['titulo'], 'descricao': anotacao['descricao'], 'email': usuarioEmail});
-                  print(anotacao.toString());
-                },
-                title: Row(children: [
-                  Text('Criação: ${dataFormatada}'),
-                  Text('  Titulo: ${anotacao['titulo']}')
-                ]),
-                subtitle: Text(anotacao['descricao'] ?? 'Sem descrição'),
+              return Wrap(
+                children: [
+                  ListTile(
+                    onTap: () {
+                      Navigator.popAndPushNamed(context, '/NovaAnotacao',
+                          arguments: {'opcao':'A','documentoId':anotacao['documentoId'],'titulo': anotacao['titulo'], 'descricao': anotacao['descricao'], 'email': usuarioEmail});
+                      print(anotacao.toString());
+                    },
+                    tileColor: Colors.grey[150],
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10)
+                    ),
+                    trailing:  IconButton(
+                      onPressed: () async {
+                        bool confirmar = await showDialog(
+                          context: context,
+                          builder: (context) => AlertDialog(
+                            title: Text("Confirmação"),
+                            content: Text("Tem certeza que deseja deletar esta anotação?"),
+                            actions: [
+                              TextButton(
+                                child: Text("Cancelar"),
+                                onPressed: () => Navigator.of(context).pop(false),
+                              ),
+                              TextButton(
+                                child: Text("Deletar"),
+                                onPressed: () => Navigator.of(context).pop(true),
+                              ),
+                            ],
+                          ),
+                        );
+                        if(confirmar) {
+                          await CadastroAnotacaoServico.deletarAnotacao(anotacao['documentoId']);
+                        }
+
+
+                      },
+                      icon: const Icon(Icons.delete_forever, color: Colors.red),
+                    ),
+                    title: Wrap(children: [
+                      Text('Criação: ${dataFormatada}'),
+                      Text('  Titulo: ${anotacao['titulo']}')
+                    ]),
+                    subtitle: Text(anotacao['descricao'] ?? 'Sem descrição'),
+                  ),
+                  Divider(color: Colors.grey,)
+                ],
+
               );
             },
           );

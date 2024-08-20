@@ -23,7 +23,7 @@ class ComponenteElevatedButton extends StatelessWidget {
     return ElevatedButton(
       style: ElevatedButton.styleFrom(
         backgroundColor: corDoBotao, // Cor do botão
-        padding: const EdgeInsets.symmetric(vertical: 16),
+        padding: const EdgeInsets.all(16),
       ),
       onPressed: () {
         funcao();
