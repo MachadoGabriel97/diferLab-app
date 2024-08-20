@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
-
 import '../componentes/componenteListaAnotacoes.dart';
 
 class TelaAnotacoes extends StatefulWidget {
   const TelaAnotacoes({super.key});
-
   @override
   State<TelaAnotacoes> createState() => _TelaAnotacoesState();
 }
@@ -17,7 +15,6 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
   @override
   void initState() {
     super.initState();
-
     Future.delayed(Duration.zero, () {
       final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
       setState(() {
@@ -41,7 +38,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-               Navigator.pushReplacementNamed(context, "/NovaAnotacao",arguments: {'email':email});
+               Navigator.pushReplacementNamed(context, "/NovaAnotacao",arguments: {'email':email,'opcao':'C'});
             },
         tooltip: "Nova anotação",
         backgroundColor: Colors.blueAccent,

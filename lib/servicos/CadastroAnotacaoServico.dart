@@ -1,16 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class CadastroAnotacaoServico {
+  String? documentoId;
   final String titulo;
   final String descricao;
   final DateTime data;
   final String usuario_email;
 
-  final db = FirebaseFirestore.instance;
+  static final  db = FirebaseFirestore.instance;
 
   CadastroAnotacaoServico(
-      {required this.descricao,
+      {this.documentoId,
       required this.titulo,
+        required this.descricao,
         required this.data,
       required this.usuario_email}) {
     final docRef =
@@ -22,9 +24,10 @@ class CadastroAnotacaoServico {
     });
   }
 
-  Map<String, dynamic> toMap() {
+   Map<String, dynamic> toMap() {
     return {
       "titulo": titulo,
+      'documentoId': documentoId,
       "descricao": descricao,
       "data":data,
       "usuario_email": usuario_email
@@ -40,7 +43,13 @@ class CadastroAnotacaoServico {
           .get();
 
       for (QueryDocumentSnapshot doc in querySnapshot.docs) {
-        anotacoes.add(doc.data() as Map<String, dynamic>);
+        anotacoes.add({
+          'documentoId': doc.id, // Armazena o documentoId
+          'titulo': doc['titulo'],
+          'descricao': doc['descricao'],
+          'data': doc['data'],
+          'usuario_email': doc['usuario_email'],
+        });
       }
 
       if (anotacoes.isEmpty) {
@@ -53,17 +62,17 @@ class CadastroAnotacaoServico {
     return anotacoes;
   }
 
-  Future<void> atualizarAnotacao(String docId) async {
+  static Future<void> atualizarAnotacao(String docId, Map<String,dynamic> novosValores) async {
     final docRef = db.collection("anotacoes").doc(docId);
     try {
-      await docRef.update(toMap());
+      await docRef.update(novosValores);
       print('Documento atualizado com sucesso: $docId');
     } catch (error) {
       print('Erro ao atualizar o documento: $error');
     }
   }
 
-  Future<void> deletarAnotacao(String docId) async {
+  static Future<void> deletarAnotacao(String docId) async {
     final docRef = db.collection("anotacoes").doc(docId);
     try {
       await docRef.delete();

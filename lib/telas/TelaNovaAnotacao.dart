@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteElevatedButton.dart';
-
 import '../componentes/componenteAppBar.dart';
 import '../componentes/componenteEditText.dart';
 import '../componentes/componenteMenu.dart';
@@ -8,19 +7,17 @@ import '../servicos/CadastroAnotacaoServico.dart';
 
 class TelaNovaAnotacao extends StatefulWidget {
   TelaNovaAnotacao({super.key});
-
   final _formKey = GlobalKey<FormState>();
-
   @override
   State<TelaNovaAnotacao> createState() => _TelaNovaAnotacaoState();
 }
 
 class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
-
   late TextEditingController controllerTitulo = TextEditingController();
   late TextEditingController controllerDescricao = TextEditingController();
   late String email='';
-
+  late String opcao='C';//A-Atualizar - C-Cadastrar
+  late String documentoId ='';
   @override
   void initState() {
     super.initState();
@@ -28,8 +25,12 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
     Future.delayed(Duration.zero, () {
       final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
       setState(() {
-        controllerTitulo = TextEditingController(text: arguments['titulo']);
-        controllerDescricao = TextEditingController(text: arguments['descricao']);
+        if(arguments['opcao']=='A'){
+          controllerTitulo = TextEditingController(text: arguments['titulo']);
+          controllerDescricao = TextEditingController(text: arguments['descricao']);
+          documentoId  = arguments['documentoId'];
+        }
+        opcao = arguments['opcao'];
         email = arguments['email'];
       });
     });
@@ -51,6 +52,7 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
+              documentoId != '' ? Text('Identificador: $documentoId',style: const TextStyle(fontWeight: FontWeight.bold),): const Text(''),
               ComponenteEditText(
                   textoLabel: "Título",
                   valorParametro: 'titulo',
@@ -67,21 +69,28 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
               const SizedBox(height: 16),
               ComponenteElevatedButton(
                 formKey: widget._formKey,
-                corDoBotao: Colors.indigoAccent,
-                tituloBotao: "Cadastrar",
+                corDoBotao: opcao=='C'? Colors.lightBlue : Colors.green,
+                tituloBotao: opcao=='C'? "Cadastrar" : 'Atualizar',
                 fechaTela: false,
-                mensagem_snackbar: "Cadastro realizado com sucesso.",
+                mensagem_snackbar: opcao=='C'? "Cadastro realizado com sucesso." : "Atualizado com sucesso.",
                 funcao: () {
                   //valida os campos, caso estejam validos, cadastra.
                   if (widget._formKey.currentState!.validate()) {
                     //chamada ao servico de cadastro da anotacao
-                   CadastroAnotacaoServico(
-                       descricao: controllerDescricao.text.toString(),
-                       titulo: controllerTitulo.text.toString(),
-                       data: DateTime.now(),
-                       usuario_email: email,
-                   );
-                   //fecha tela e abre a tela inicial
+                    Map<String,dynamic> novosValores = {};
+                    novosValores['titulo'] =  controllerTitulo.text.toString();
+                    novosValores['descricao'] =   controllerDescricao.text.toString();
+                    novosValores['data'] =   DateTime.now();
+                    if(opcao=='C'){
+                      CadastroAnotacaoServico(
+                        descricao: controllerDescricao.text.toString(),
+                        titulo: controllerTitulo.text.toString(),
+                        data: DateTime.now(),
+                        usuario_email: email,
+                      );
+                    }else{
+                      CadastroAnotacaoServico.atualizarAnotacao(documentoId, novosValores);
+                    }
                    Navigator.pushReplacementNamed(context, '/anotacoes',arguments: {'email': email});
                   }
                 },
