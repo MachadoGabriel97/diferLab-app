@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/telas/GerenciarIdeias.dart';
 import 'package:navigator_project/telas/ImageUploader.dart';
 import 'package:navigator_project/telas/TelaLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:navigator_project/telas/TelaRecuperarSenha.dart';
 import 'firebase_options.dart';
+import 'telas/GerenciarUsuarios.dart';
 import 'telas/TelaAnotacoes.dart';
 import 'telas/TelaConfiguracoes.dart';
 import 'telas/TelaDetalhes.dart';
@@ -27,6 +29,8 @@ void main() async {
           '/novaIdeia': (context) => TelaNovaIdeia(),
           '/minhasIdeias': (context) => TelaMinhasIdeias(),
           '/anotacoes': (context) => const TelaAnotacoes(),
+          '/gerenciar_usuarios': (context) => const GerenciarUsuarios(),
+          '/gerenciar_ideias': (context) => const GerenciarIdeias(),
           '/detalhes': (context) => TelaDetalhes(),
           '/NovaAnotacao': (context) => TelaNovaAnotacao(),
           '/recados': (context) => TelaPrincipalRecados(),
