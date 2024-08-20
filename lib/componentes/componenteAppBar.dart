@@ -62,6 +62,7 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
       iconTheme: const IconThemeData(
         color: Colors.white
       ),
+      elevation: 10,
       centerTitle: true,
       actions: [
         Padding(

@@ -6,16 +6,17 @@ class ComponenteElevatedButton extends StatelessWidget {
   final String tituloBotao;
   final String mensagem_snackbar;
   final VoidCallback funcao;
-  final bool fechaTela;
+
 
   GlobalKey<FormState> formKey = GlobalKey<FormState>();
-  ComponenteElevatedButton({super.key,
+  ComponenteElevatedButton(
+  {super.key,
     required this.formKey,
     required this.corDoBotao,
     required this.tituloBotao,
     required this.funcao,
     required this.mensagem_snackbar,
-    required this.fechaTela
+
   });
 
   @override
@@ -36,9 +37,6 @@ class ComponenteElevatedButton extends StatelessWidget {
             content:  Text(
                 mensagem_snackbar),
           ));
-        }
-        if(fechaTela){
-          Navigator.pop(context);
         }
       },
       child: Text(tituloBotao, style: const TextStyle(color: Colors.white),),

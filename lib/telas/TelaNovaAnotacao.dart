@@ -71,7 +71,6 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
                 formKey: widget._formKey,
                 corDoBotao: opcao=='C'? Colors.lightBlue : Colors.green,
                 tituloBotao: opcao=='C'? "Cadastrar" : 'Atualizar',
-                fechaTela: false,
                 mensagem_snackbar: opcao=='C'? "Cadastro realizado com sucesso." : "Atualizado com sucesso.",
                 funcao: () {
                   //valida os campos, caso estejam validos, cadastra.

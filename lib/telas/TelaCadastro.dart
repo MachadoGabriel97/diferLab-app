@@ -15,7 +15,7 @@ class _RegisterScreenState extends State<TelaCadastro> {
   TextEditingController();
   final _formKey = GlobalKey<FormState>();
 
-  bool _validatePassword(String password) {
+  bool _validarSenha(String password) {
     if (password.length < 8) return false;
     if (!RegExp(r'[A-Za-z]').hasMatch(password)) return false;
     if (!RegExp(r'[0-9]').hasMatch(password)) return false;
@@ -55,6 +55,10 @@ class _RegisterScreenState extends State<TelaCadastro> {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira um e-mail';
                           }
+                          if (!value.contains('.com') || !value.contains('@')) {
+                            return 'Por favor, deve conter @ e .com no e-mail';
+                          }
+
                           if (!RegExp(r'^[^@]+@[^@]+\.[^@]+').hasMatch(value)) {
                             return 'Por favor, insira um e-mail válido';
                           }
@@ -79,7 +83,7 @@ class _RegisterScreenState extends State<TelaCadastro> {
                           if (value == null || value.isEmpty) {
                             return 'Por favor, insira uma senha';
                           }
-                          if (!_validatePassword(value)) {
+                          if (!_validarSenha(value)) {
                             return 'A senha deve ter ao menos 8 caracteres, incluindo letras e números';
                           }
                           return null;
@@ -95,8 +99,6 @@ class _RegisterScreenState extends State<TelaCadastro> {
                           labelText: 'Confirme a Senha',
                           filled: true,
                           fillColor: Colors.white,
-
-
                         ),
                         obscureText: true,
                         validator: (value) {
@@ -105,6 +107,9 @@ class _RegisterScreenState extends State<TelaCadastro> {
                           }
                           if (value != _passwordController.text) {
                             return 'As senhas não coincidem';
+                          }
+                          if (!_validarSenha(value)) {
+                            return 'A senha deve ter ao menos 8 caracteres, incluindo letras e números';
                           }
                           return null;
                         },
@@ -118,9 +123,13 @@ class _RegisterScreenState extends State<TelaCadastro> {
                         tituloBotao: "Cadastrar",
                         formKey: _formKey,
                         mensagem_snackbar: "Dados salvos com sucesso!\n Favor realizar seu login com o usuário e senha criados.",
-                        fechaTela: true,
                         funcao: (){
-                          AutenticacaoServico().cadastrarUsuario( email: _emailController.text.toString(), senha:_passwordController.text.toString());
+                          print(_formKey.currentState!.validate());
+                          if(_formKey.currentState!.validate()){
+                            AutenticacaoServico().cadastrarUsuario( email: _emailController.text.toString(), senha:_passwordController.text.toString());
+                            Navigator.pop(context);
+                          }
+
                         },
                       ),
                     ),
