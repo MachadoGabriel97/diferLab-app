@@ -126,7 +126,10 @@ class _RegisterScreenState extends State<TelaCadastro> {
                         funcao: (){
                           print(_formKey.currentState!.validate());
                           if(_formKey.currentState!.validate()){
-                            AutenticacaoServico().cadastrarUsuario( email: _emailController.text.toString(), senha:_passwordController.text.toString());
+                            AutenticacaoServico().cadastrarUsuario(
+                                email: _emailController.text.toString(),
+                                senha:_passwordController.text.toString()
+                            );
                             Navigator.pop(context);
                           }
 
