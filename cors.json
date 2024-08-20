@@ -2,6 +2,11 @@
   {
     "origin": ["https://machadogabriel97.github.io", "http://localhost:*"],
     "method": ["GET","HEAD"],
-    "maxAgeSeconds": 3600
+    "maxAgeSeconds": 3600,
+    "responseHeader": ["Content-Type"]
   }
 ]
+
+
+
+
