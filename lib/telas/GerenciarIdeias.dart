@@ -27,6 +27,7 @@ class _GerenciarIdeiasState extends State<GerenciarIdeias> {
     return Scaffold(
       appBar: ComponenteAppBar(tituloComponente: "Gerenciar Ideias",mostrarIconeMenu:true, usuarioLogado: email),
       drawer: ComponenteMenu(email: email,),
+      //todo: criar logica para gerenciar as ideias, enviar acompanhamentos no chat
       body: const Column(children: [Text('Tela para gerenciamento e acompanhamento de ideias')],),
 
     );

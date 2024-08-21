@@ -113,7 +113,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                       onPressed: () {
                         print(controleNomeColaborador.value.text);
                         print(sexo_informado.toString());
-                        //todo:Criar logica para salvar/atualizar as configurações do projeto
+                        //todo:Criar logica para salvar/atualizar as configurações do usuario
                         ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
                           backgroundColor: Colors.lightGreen,
                           showCloseIcon: true,
