@@ -65,13 +65,11 @@ class _TelaRecuperarSenhaState extends State<TelaRecuperarSenha> {
                         tituloBotao: "Recuperar conta",
                         formKey: _formKey,
                         mensagem_snackbar: "Favor verique seu e-mail para dar seguimento na recuperação da conta.",
-                        fechaTela: false,
                         funcao: (){
                           AutenticacaoServico().enviarEmailRecuperacaoConta(_emailController.text);
                           Future.delayed(
                               Duration(seconds: 5),() {Navigator.pop(context);},
                           );
-
                         },
                       ),
                     ),
