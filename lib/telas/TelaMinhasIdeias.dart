@@ -38,7 +38,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            //carregar_filtros(),
+            carregar_filtros(),
             carregar_tabela(),
           ],
         ),
@@ -105,6 +105,94 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
                       'email':email,
                       'protocolo': '123',
                       'title': 'Titulo1',
+                      'date': '20/07/2024',
+                      'status': 'analise',
+                      'description': 'Descrição detalhada da ideia.',
+                      'proposal': 'Proposta da ideia.',
+                      'benefits': 'Benefícios da implementação.',
+                      'feedback': 'Feedback recebido.',
+                    });
+                  },
+                )),
+              ]),
+               DataRow(cells: [
+                const DataCell(Wrap(children: [Text('2')],)),
+                const DataCell(Wrap(children: [Text('Titulo2')],)),
+                const DataCell(Wrap(children: [Text('20/07/2024')],)),
+                const DataCell(Wrap(children: [Text('Análise')],)),
+                DataCell( IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/detalhes', arguments: {
+                      'email':email,
+                      'protocolo': '2',
+                      'title': 'Titulo2',
+                      'date': '20/07/2024',
+                      'status': 'analise',
+                      'description': 'Descrição detalhada da ideia.',
+                      'proposal': 'Proposta da ideia.',
+                      'benefits': 'Benefícios da implementação.',
+                      'feedback': 'Feedback recebido.',
+                    });
+                  },
+                )),
+              ]),
+               DataRow(cells: [
+                const DataCell(Wrap(children: [Text('3')],)),
+                const DataCell(Wrap(children: [Text('Titulo3')],)),
+                const DataCell(Wrap(children: [Text('20/07/2024')],)),
+                const DataCell(Wrap(children: [Text('Análise')],)),
+                DataCell( IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/detalhes', arguments: {
+                      'email':email,
+                      'protocolo': '3',
+                      'title': 'Titulo3',
+                      'date': '20/07/2024',
+                      'status': 'analise',
+                      'description': 'Descrição detalhada da ideia.',
+                      'proposal': 'Proposta da ideia.',
+                      'benefits': 'Benefícios da implementação.',
+                      'feedback': 'Feedback recebido.',
+                    });
+                  },
+                )),
+              ]),
+               DataRow(cells: [
+                const DataCell(Wrap(children: [Text('4')],)),
+                const DataCell(Wrap(children: [Text('Titulo3')],)),
+                const DataCell(Wrap(children: [Text('20/07/2024')],)),
+                const DataCell(Wrap(children: [Text('Análise')],)),
+                DataCell( IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/detalhes', arguments: {
+                      'email':email,
+                      'protocolo': '4',
+                      'title': 'Titulo4',
+                      'date': '20/07/2024',
+                      'status': 'analise',
+                      'description': 'Descrição detalhada da ideia.',
+                      'proposal': 'Proposta da ideia.',
+                      'benefits': 'Benefícios da implementação.',
+                      'feedback': 'Feedback recebido.',
+                    });
+                  },
+                )),
+              ]),
+               DataRow(cells: [
+                const DataCell(Wrap(children: [Text('5')],)),
+                const DataCell(Wrap(children: [Text('Titulo3')],)),
+                const DataCell(Wrap(children: [Text('20/07/2024')],)),
+                const DataCell(Wrap(children: [Text('Análise')],)),
+                DataCell( IconButton(
+                  icon: const Icon(Icons.search),
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/detalhes', arguments: {
+                      'email':email,
+                      'protocolo': '5',
+                      'title': 'Titulo5',
                       'date': '20/07/2024',
                       'status': 'analise',
                       'description': 'Descrição detalhada da ideia.',
