@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteEditText.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
-import 'package:navigator_project/telas/ImageUploader.dart';
 
 enum Sexo {masculino, feminino}
 
