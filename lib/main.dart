@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:navigator_project/telas/ChatProtocolo.dart';
 import 'package:navigator_project/telas/GerenciarIdeias.dart';
+import 'package:navigator_project/telas/GerenciarRecados.dart';
 import 'package:navigator_project/telas/ImageUploader.dart';
 import 'package:navigator_project/telas/TelaLogin.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -31,6 +32,7 @@ void main() async {
           '/minhasIdeias': (context) => TelaMinhasIdeias(),
           '/anotacoes': (context) => const TelaAnotacoes(),
           '/gerenciar_usuarios': (context) => const GerenciarUsuarios(),
+          '/gerenciar_recados': (context) => const GerenciarRecados(),
           '/gerenciar_ideias': (context) => const GerenciarIdeias(),
           '/detalhes': (context) => TelaDetalhes(),
           '/chat_protocolo': (context) => ChatProtocolo(),
