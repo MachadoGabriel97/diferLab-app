@@ -27,12 +27,12 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
       appBar:   ComponenteAppBar(tituloComponente: "Minhas Ideias",mostrarIconeMenu:true,usuarioLogado: email),
       drawer:  ComponenteMenu(email: email,),
       floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.lightbulb_outline,color: Colors.yellowAccent,),
           backgroundColor: const Color(0xFF242849),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
           tooltip: "Nova Idéia",
           hoverColor: const Color(0xFF373C86) ,
-          onPressed: (){ Navigator.pushNamed(context, '/novaIdeia', arguments: {'email': email});}
+          onPressed: (){ Navigator.pushNamed(context, '/novaIdeia', arguments: {'email': email});},
+          child: const Icon(Icons.lightbulb_outline,color: Colors.yellowAccent,)
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -56,27 +56,15 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
               const SizedBox(height: 16),
               Column(
                 children: [
-                  const Text('Data da Sugestão:', style: TextStyle(fontWeight: FontWeight.bold)),
-
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        labelText: 'Início',
-                        suffixIcon: Icon(Icons.calendar_today)),
-                  ),
-
-                  const SizedBox(width: 16),
-                  TextFormField(
-                    decoration: const InputDecoration(
-                        labelText: 'Fim',
-                        suffixIcon: Icon(Icons.calendar_today)),
-                  ),
-                  const SizedBox(width: 16),
+                  Text('Filtros:'),
                   DropdownButtonFormField<String>(
                     decoration: const InputDecoration(labelText: 'Selecione uma situação'),
                     items: const [
                       DropdownMenuItem(value: null, child: Text('Não Filtrar')),
                       DropdownMenuItem(value: 'analise', child: Text('Análise')),
                       DropdownMenuItem(value: 'aprovado', child: Text('Aprovado')),
+                      DropdownMenuItem(value: 'em_andamento', child: Text('Em Andamento')),
+                      DropdownMenuItem(value: 'concluido', child: Text('Concluido')),
                       DropdownMenuItem(value: 'rejeitado', child: Text('Rejeitado')),
                     ],
                     onChanged: (value) {},
@@ -97,6 +85,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
           DataTable(
             //Define o cabeçalho da tabela
             columns: const [
+              DataColumn(label: Text('Protocolo')),
               DataColumn(label: Text('Título')),
               DataColumn(label: Text('Data Sugestão')),
               DataColumn(label: Text('Status')),
@@ -105,35 +94,19 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
             //todo: implementar logica para carregar as idéias de acordo com o e-mail do usuário logado
             rows: [
                DataRow(cells: [
-                const DataCell(Wrap(children: [Text('teste melhoria em algo')],)),
+                const DataCell(Wrap(children: [Text('123')],)),
+                const DataCell(Wrap(children: [Text('Titulo1')],)),
                 const DataCell(Wrap(children: [Text('20/07/2024')],)),
                 const DataCell(Wrap(children: [Text('Análise')],)),
                 DataCell( IconButton(
                   icon: const Icon(Icons.search),
                   onPressed: () {
                     Navigator.pushNamed(context, '/detalhes', arguments: {
-                      'title': 'teste melhoria em algo',
+                      'email':email,
+                      'protocolo': '123',
+                      'title': 'Titulo1',
                       'date': '20/07/2024',
-                      'status': 'Análise',
-                      'description': 'Descrição detalhada da ideia.',
-                      'proposal': 'Proposta da ideia.',
-                      'benefits': 'Benefícios da implementação.',
-                      'feedback': 'Feedback recebido.',
-                    });
-                  },
-                )),
-              ]),
-              DataRow(cells: [
-                const DataCell(Wrap(children: [Text('teste 2 melhoria em algo')],)),
-                const DataCell(Wrap(children: [Text('21/07/2024')],)),
-                const DataCell(Wrap(children: [Text('Rejeitado')],)),
-                DataCell( IconButton(
-                  icon: const Icon(Icons.search),
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/detalhes', arguments: {
-                      'title': 'teste 2 melhoria em algo',
-                      'date': '21/07/2024',
-                      'status': 'Rejeitado',
+                      'status': 'analise',
                       'description': 'Descrição detalhada da ideia.',
                       'proposal': 'Proposta da ideia.',
                       'benefits': 'Benefícios da implementação.',

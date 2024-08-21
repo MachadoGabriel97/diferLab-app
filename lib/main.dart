@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/telas/ChatProtocolo.dart';
 import 'package:navigator_project/telas/GerenciarIdeias.dart';
 import 'package:navigator_project/telas/ImageUploader.dart';
 import 'package:navigator_project/telas/TelaLogin.dart';
@@ -32,6 +33,7 @@ void main() async {
           '/gerenciar_usuarios': (context) => const GerenciarUsuarios(),
           '/gerenciar_ideias': (context) => const GerenciarIdeias(),
           '/detalhes': (context) => TelaDetalhes(),
+          '/chat_protocolo': (context) => ChatProtocolo(),
           '/NovaAnotacao': (context) => TelaNovaAnotacao(),
           '/recados': (context) => TelaPrincipalRecados(),
           '/configuracoes': (context) => const TelaConfiguracoes(),
