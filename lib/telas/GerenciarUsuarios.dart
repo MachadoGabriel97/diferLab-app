@@ -25,7 +25,7 @@ class _GerenciarUsuariosState extends State<GerenciarUsuarios> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ComponenteAppBar(tituloComponente: "Gerenciar Usuarios",usuarioLogado: email),
+      appBar: ComponenteAppBar(tituloComponente: "Gerenciar Usuarios",mostrarIconeMenu:true,usuarioLogado: email),
       drawer: ComponenteMenu(email: email,),
       body: const Column(children: [Text('Tela para gerenciamento dos usuários')],),
 

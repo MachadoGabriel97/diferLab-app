@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 
 class TelaDetalhes extends StatefulWidget {
@@ -26,15 +27,7 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
 
     return Scaffold(
       drawer: ComponenteMenu(email: email,),
-      appBar: AppBar(
-        title: const Text('Detalhes'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: ComponenteAppBar(tituloComponente: 'Detalhes',mostrarIconeMenu: false,usuarioLogado: email,),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(

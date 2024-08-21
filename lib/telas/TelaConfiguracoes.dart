@@ -37,7 +37,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: ComponenteMenu(email: email,),
-      appBar: ComponenteAppBar(tituloComponente: "Configurações",usuarioLogado: email),
+      appBar: ComponenteAppBar(tituloComponente: "Configurações",mostrarIconeMenu:true,usuarioLogado: email),
       body: Container(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(

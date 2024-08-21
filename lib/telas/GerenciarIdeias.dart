@@ -25,7 +25,7 @@ class _GerenciarIdeiasState extends State<GerenciarIdeias> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ComponenteAppBar(tituloComponente: "Gerenciar Ideias",usuarioLogado: email),
+      appBar: ComponenteAppBar(tituloComponente: "Gerenciar Ideias",mostrarIconeMenu:true, usuarioLogado: email),
       drawer: ComponenteMenu(email: email,),
       body: const Column(children: [Text('Tela para gerenciamento e acompanhamento de ideias')],),
 

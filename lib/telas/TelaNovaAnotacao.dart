@@ -43,7 +43,7 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
     return Scaffold(
       drawer: ComponenteMenu(email: email,),
       appBar:  ComponenteAppBar(
-          tituloComponente: "Nova Anotação", usuarioLogado: email),
+          tituloComponente: "Nova Anotação",mostrarIconeMenu:false, usuarioLogado: email),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
