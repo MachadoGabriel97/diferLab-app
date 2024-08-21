@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +20,7 @@ class _ChatProtocoloState extends State<ChatProtocolo> {
   final ScrollController _scrollController = ScrollController();
 
   void _sendMessage() {
+
     if (_controller.text.isNotEmpty) {
       _messagesCollection.add({
         'texto_mensagem': _controller.text,
@@ -31,10 +34,29 @@ class _ChatProtocoloState extends State<ChatProtocolo> {
   }
 
   void _autoReply() {
+    List<Map<int,String>> frases =
+      [
+        {0: 'Olá, estou bem e você ?'},
+        {1: 'Se nenhuma ideia vier à cabeça, leve a cabeça às ideias!'},
+        {2: 'A questão não é essa, exatamente. Vamos pensar melhor sobre, que tal?'},
+        {3: 'O que é raro tem valor; o abundante, não.'},
+        {4: 'O sábio torna seu caráter amplo, puro, de modo a poder dar apoio aos outros homens e às coisas.'},
+        {5: 'Voaram, lado a lado, sem olhar para trás. O passado, agora, não significava mais nada.'},
+        {6: 'Sempre achei que fosse o contrário: você e ela, ao invés de ela e você.'},
+        {7: 'Cada vez que o cachorro latia, o gato miava, e o papagaio repetia a última coisa que disse.'},
+        {8: 'E nem tudo que é caro realmente custa alguma coisa.'},
+        {9: 'Toda vez que ele vem aqui eu fico meio assim, sei lá…'},
+        {10: 'E a revolução começou a partir de um beijo interrompido.'},
+        {11: 'Eu juro que não sei quem foi, por que você tá falando assim? A honra não consiste em não cair nunca, mas em levantar cada vez que se cai.'},
+        {12: 'Ele não queria acreditar. Nunca quis, na verdade. Mas, dessa vez, ele precisou.'},
+        {13: 'E é exatamente por isso que a Terra é necessariamente plana!'}
+    ];
+    String frase = frases.elementAt(Random().nextInt(frases.length)).values.toString();
+    print(frase);
     Future.delayed(const Duration(seconds: 1), () {
       _messagesCollection.add({
         'email_origem':'automatico@email.com',
-        'texto_mensagem': 'Esta é uma resposta automática.',
+        'texto_mensagem': frase.replaceAll('(', '').replaceAll(')', ''),
         'protocolo':protocolo,
         'timestamp': FieldValue.serverTimestamp(),
       });
