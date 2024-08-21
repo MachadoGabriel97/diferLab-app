@@ -63,13 +63,6 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.lightbulb_outline),
-            title: const Text('Nova Ideia'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/novaIdeia', arguments: {'email': widget.email});
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.list),
             title: const Text('Minhas Ideias'),
             onTap: () {
