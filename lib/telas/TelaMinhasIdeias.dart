@@ -24,8 +24,16 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar:   ComponenteAppBar(tituloComponente: "Minhas Ideias",usuarioLogado: email),
+      appBar:   ComponenteAppBar(tituloComponente: "Minhas Ideias",mostrarIconeMenu:true,usuarioLogado: email),
       drawer:  ComponenteMenu(email: email,),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.lightbulb_outline,color: Colors.yellowAccent,),
+          backgroundColor: const Color(0xFF242849),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+          tooltip: "Nova Idéia",
+          hoverColor: const Color(0xFF373C86) ,
+          onPressed: (){ Navigator.pushNamed(context, '/novaIdeia', arguments: {'email': email});}
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
