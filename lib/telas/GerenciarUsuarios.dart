@@ -27,6 +27,7 @@ class _GerenciarUsuariosState extends State<GerenciarUsuarios> {
     return Scaffold(
       appBar: ComponenteAppBar(tituloComponente: "Gerenciar Usuarios",mostrarIconeMenu:true,usuarioLogado: email),
       drawer: ComponenteMenu(email: email,),
+      //todo: implementar logica para criar,alterar,inativar usuarios
       body: const Column(children: [Text('Tela para gerenciamento dos usuários')],),
 
     );
