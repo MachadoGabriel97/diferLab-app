@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 import '../componentes/componenteAppBar.dart';
 import '../componentes/componenteMenu.dart';
-class GerenciarIdeias extends StatefulWidget {
-  const GerenciarIdeias({super.key});
+class GerenciarRecados extends StatefulWidget {
+  const GerenciarRecados({super.key});
 
   @override
-  State<GerenciarIdeias> createState() => _GerenciarIdeiasState();
+  State<GerenciarRecados> createState() => _GerenciarRecadosState();
 }
 
-class _GerenciarIdeiasState extends State<GerenciarIdeias> {
+class _GerenciarRecadosState extends State<GerenciarRecados> {
   late String email='';
   @override
   void initState() {
@@ -25,10 +25,10 @@ class _GerenciarIdeiasState extends State<GerenciarIdeias> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: ComponenteAppBar(tituloComponente: "Gerenciar Ideias",mostrarIconeMenu:true, usuarioLogado: email),
+      appBar: ComponenteAppBar(tituloComponente: "Gerenciar Recados",mostrarIconeMenu:true, usuarioLogado: email),
       drawer: ComponenteMenu(email: email,),
-      //todo: criar logica para gerenciar as ideias, enviar acompanhamentos no chat
-      body: const Column(children: [Text('Tela para gerenciamento e acompanhamento de ideias')],),
+      //todo: criar logica para gerenciar os recados
+      body: const Column(children: [Text('Tela para gerenciamento de recados')],),
 
     );
   }

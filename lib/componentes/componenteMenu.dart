@@ -63,13 +63,6 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.lightbulb_outline),
-            title: const Text('Nova Ideia'),
-            onTap: () {
-              Navigator.pushReplacementNamed(context, '/novaIdeia', arguments: {'email': widget.email});
-            },
-          ),
-          ListTile(
             leading: const Icon(Icons.list),
             title: const Text('Minhas Ideias'),
             onTap: () {
@@ -126,7 +119,18 @@ class _ComponenteMenuState extends State<ComponenteMenu> {
               },
             ),
             ListTile(
-              leading: const Icon(Icons.announcement_rounded),
+              leading: const Icon(Icons.message),
+              title: const Text('Recados'),
+              onTap: () {
+                Navigator.pushReplacementNamed(
+                    context,
+                    '/gerenciar_recados',
+                    arguments: {'email': widget.email}
+                );
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.lightbulb_sharp),
               title: const Text('Ideias'),
               onTap: () {
                 Navigator.pushReplacementNamed(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 
 class TelaDetalhes extends StatefulWidget {
@@ -9,13 +10,15 @@ class TelaDetalhes extends StatefulWidget {
 class _TelaDetalhesState extends State<TelaDetalhes> {
 
   late String? email='';
+  late String? protocolo='';
+
   @override
   void initState() {
     super.initState();
     Future.delayed(Duration.zero, () {
-      final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
+      //final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
       setState(() {
-        email = arguments['email'];
+
       });
     });
   }
@@ -23,26 +26,21 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
   @override
   Widget build(BuildContext context) {
     final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
-
+    setState(() {
+      email = arguments['email'];
+      protocolo = arguments['protocolo'];
+    });
     return Scaffold(
       drawer: ComponenteMenu(email: email,),
-      appBar: AppBar(
-        title: const Text('Detalhes'),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        ),
-      ),
+      appBar: ComponenteAppBar(tituloComponente: 'Detalhes',mostrarIconeMenu: false,usuarioLogado: email,),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: ListView(
           children: [
             TextFormField(
-              initialValue: arguments['title'],
+              initialValue: protocolo,
               decoration: const InputDecoration(
-                labelText: 'Título',
+                labelText: 'Protocolo',
               ),
               readOnly: true,
             ),
@@ -57,6 +55,14 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
               initialValue: arguments['status'],
               decoration: const InputDecoration(
                 labelText: 'Status',
+              ),
+              readOnly: true,
+            ),
+
+            TextFormField(
+              initialValue: arguments['title'],
+              decoration: const InputDecoration(
+                labelText: 'Título',
               ),
               readOnly: true,
             ),
@@ -97,7 +103,10 @@ class _TelaDetalhesState extends State<TelaDetalhes> {
       ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.blueAccent,
-        onPressed: (){},elevation: 10, child: const Icon(Icons.chat, color: Colors.white,),
+        onPressed: (){
+          Navigator.pushNamed(context, '/chat_protocolo',arguments: {'protocolo':protocolo,'email':email});
+        },
+        elevation: 10, child: const Icon(Icons.chat, color: Colors.white,),
         hoverColor: Colors.indigoAccent,
         tooltip: "Ver acompanhamentos",
       ),

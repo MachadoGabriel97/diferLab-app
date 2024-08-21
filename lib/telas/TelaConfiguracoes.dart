@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteEditText.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
-import 'package:navigator_project/telas/ImageUploader.dart';
 
 enum Sexo {masculino, feminino}
 
@@ -37,7 +36,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
   Widget build(BuildContext context) {
     return Scaffold(
       drawer: ComponenteMenu(email: email,),
-      appBar: ComponenteAppBar(tituloComponente: "Configurações",usuarioLogado: email),
+      appBar: ComponenteAppBar(tituloComponente: "Configurações",mostrarIconeMenu:true,usuarioLogado: email),
       body: Container(
         padding: const EdgeInsets.all(16),
         child: SingleChildScrollView(
@@ -114,7 +113,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                       onPressed: () {
                         print(controleNomeColaborador.value.text);
                         print(sexo_informado.toString());
-                        //todo:Criar logica para salvar/atualizar as configurações do projeto
+                        //todo:Criar logica para salvar/atualizar as configurações do usuario
                         ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
                           backgroundColor: Colors.lightGreen,
                           showCloseIcon: true,

@@ -1,14 +1,16 @@
-
 import 'package:flutter/material.dart';
 import 'package:navigator_project/servicos/ImageService.dart';
 
 class ComponenteAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String tituloComponente;
   final String? usuarioLogado;
+  final bool? mostrarIconeMenu;
+
 
   const ComponenteAppBar({
     super.key,
     required this.tituloComponente,
+    this.mostrarIconeMenu,
     this.usuarioLogado,
   });
 
@@ -64,6 +66,19 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
       ),
       elevation: 10,
       centerTitle: true,
+      leading: widget.mostrarIconeMenu!
+          ? IconButton(
+        icon: const Icon(Icons.menu, color: Colors.white),
+        onPressed: () {
+          Scaffold.of(context).openDrawer();
+        },
+      )
+          : IconButton(
+        icon: const Icon(Icons.arrow_back, color: Colors.white),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
       actions: [
         Padding(
           padding: const EdgeInsets.all(10),
@@ -90,6 +105,7 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
       backgroundColor: const Color(0xFF242849),
     );
   }
+
 
 }
 

@@ -17,11 +17,12 @@ class _TelaRecuperarSenhaState extends State<TelaRecuperarSenha> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFF242849), // Cor de fundo definida para hex 242849
-      appBar: const ComponenteAppBar(tituloComponente: "Recuperar Conta"),
+      appBar: const ComponenteAppBar(tituloComponente: "Esqueceu sua senha ? ",mostrarIconeMenu: false, ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           double width =
           constraints.maxWidth > 480 ? 480 : constraints.maxWidth;
+
           return Padding(
             padding: const EdgeInsets.all(16.0),
             child: Center(
@@ -64,9 +65,13 @@ class _TelaRecuperarSenhaState extends State<TelaRecuperarSenha> {
                         tituloBotao: "Recuperar conta",
                         formKey: _formKey,
                         mensagem_snackbar: "Favor verique seu e-mail para dar seguimento na recuperação da conta.",
+                        fechaTela: false,
                         funcao: (){
                           AutenticacaoServico().enviarEmailRecuperacaoConta(_emailController.text);
-                          Navigator.pop(context);
+                          Future.delayed(
+                              Duration(seconds: 5),() {Navigator.pop(context);},
+                          );
+
                         },
                       ),
                     ),

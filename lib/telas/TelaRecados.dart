@@ -28,7 +28,8 @@ class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
     return   Scaffold(
         drawer:   ComponenteMenu(email: email,),
         appBar: ComponenteAppBar(
-          tituloComponente: "Recados", usuarioLogado: email,),
+          tituloComponente: "Recados", mostrarIconeMenu:true,
+          usuarioLogado: email,),
         body: const Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
