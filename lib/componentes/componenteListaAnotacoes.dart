@@ -36,7 +36,7 @@ class ComponenteListaAnotacoes extends StatelessWidget {
                 children: [
                   ListTile(
                     onTap: () {
-                      Navigator.popAndPushNamed(context, '/NovaAnotacao',
+                      Navigator.pushNamed(context, '/NovaAnotacao',
                           arguments: {'opcao':'A','documentoId':anotacao['documentoId'],'titulo': anotacao['titulo'], 'descricao': anotacao['descricao'], 'email': usuarioEmail});
                       print(anotacao.toString());
                     },

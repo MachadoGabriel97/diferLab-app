@@ -4,7 +4,7 @@ class ComponenteElevatedButton extends StatelessWidget {
 
   final Color corDoBotao  ;
   final String tituloBotao;
-  final String mensagem_snackbar;
+  String? mensagem_snackbar;
   final VoidCallback funcao;
 
 
@@ -15,7 +15,7 @@ class ComponenteElevatedButton extends StatelessWidget {
     required this.corDoBotao,
     required this.tituloBotao,
     required this.funcao,
-    required this.mensagem_snackbar,
+    this.mensagem_snackbar,
 
   });
 
@@ -29,13 +29,13 @@ class ComponenteElevatedButton extends StatelessWidget {
       onPressed: () {
         funcao();
 
-        if (formKey.currentState!.validate()) {
+        if (formKey.currentState!.validate() && mensagem_snackbar!=null) {
           ScaffoldMessenger.of(context).showSnackBar( SnackBar(
             backgroundColor: Colors.green,
             showCloseIcon: false,
             duration: const Duration(seconds: 5),
             content:  Text(
-                mensagem_snackbar),
+                mensagem_snackbar.toString()),
           ));
         }
       },

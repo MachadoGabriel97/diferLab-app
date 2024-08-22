@@ -11,8 +11,8 @@ class TelaNovaIdeia extends StatefulWidget {
 }
 
 class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
-  final TextEditingController _controllerTitulo = TextEditingController();
-  final TextEditingController _controllerDescricao = TextEditingController();
+  late TextEditingController _controllerTitulo = TextEditingController();
+  late  TextEditingController _controllerDescricao = TextEditingController();
   final TextEditingController _controllerSolucao = TextEditingController();
   final TextEditingController _controllerBeneficios = TextEditingController();
   bool? selecao_termo = false;
@@ -23,6 +23,8 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
     Future.delayed(Duration.zero, () {
       final Map arguments = ModalRoute.of(context)!.settings.arguments as Map;
       setState(() {
+        _controllerTitulo.text = arguments['titulo'];
+        _controllerDescricao.text = arguments['descricao'];
         _email = arguments['email'];
       });
     });
@@ -46,6 +48,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                   decoration: const InputDecoration(
                     labelText: 'Título',
                   ),
+                  //initialValue: _controllerTitulo.text,
                   controller: _controllerTitulo,
                   maxLength: 100,
                 ),
@@ -53,6 +56,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                   decoration: const InputDecoration(
                     labelText: 'Descrição (Problema ou melhoria)',
                   ),
+                  //initialValue: _controllerDescricao.text,
                   maxLength: 1000,
                   controller: _controllerDescricao,
                   maxLines: 5,

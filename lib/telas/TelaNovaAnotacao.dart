@@ -18,6 +18,8 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
   late String email='';
   late String opcao='C';//A-Atualizar - C-Cadastrar
   late String documentoId ='';
+  late bool transformarEmIdeia=false;
+
   @override
   void initState() {
     super.initState();
@@ -29,6 +31,8 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
           controllerTitulo = TextEditingController(text: arguments['titulo']);
           controllerDescricao = TextEditingController(text: arguments['descricao']);
           documentoId  = arguments['documentoId'];
+          transformarEmIdeia = true;
+          //print(transformarEmIdeia);
         }
         opcao = arguments['opcao'];
         email = arguments['email'];
@@ -67,33 +71,53 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
                   controller: controllerDescricao
               ),
               const SizedBox(height: 16),
-              ComponenteElevatedButton(
-                formKey: widget._formKey,
-                corDoBotao: opcao=='C'? Colors.lightBlue : Colors.green,
-                tituloBotao: opcao=='C'? "Cadastrar" : 'Atualizar',
-                mensagem_snackbar: opcao=='C'? "Cadastro realizado com sucesso." : "Atualizado com sucesso.",
-                funcao: () {
-                  //valida os campos, caso estejam validos, cadastra.
-                  if (widget._formKey.currentState!.validate()) {
-                    //chamada ao servico de cadastro da anotacao
-                    Map<String,dynamic> novosValores = {};
-                    novosValores['titulo'] =  controllerTitulo.text.toString();
-                    novosValores['descricao'] =   controllerDescricao.text.toString();
-                    novosValores['data'] =   DateTime.now();
-                    if(opcao=='C'){
-                      CadastroAnotacaoServico(
-                        descricao: controllerDescricao.text.toString(),
-                        titulo: controllerTitulo.text.toString(),
-                        data: DateTime.now(),
-                        usuario_email: email,
-                      );
-                    }else{
-                      CadastroAnotacaoServico.atualizarAnotacao(documentoId, novosValores);
+              Row(children: [
+                transformarEmIdeia ?
+                  ComponenteElevatedButton(
+                    formKey: widget._formKey,
+                    corDoBotao: Colors.lightBlue ,
+                    tituloBotao: 'Transformar em idéia',
+                    funcao: () {
+                      Navigator.pushNamed(
+                          context,
+                          '/novaIdeia',
+                          arguments: {
+                            'titulo':controllerTitulo.text,
+                            'descricao':controllerDescricao.text,
+                            'email':email
+                          });
+                    },
+                  ): Container(),
+                ComponenteElevatedButton(
+                  formKey: widget._formKey,
+                  corDoBotao: opcao=='C'? Colors.lightBlue : Colors.green,
+                  tituloBotao: opcao=='C'? "Cadastrar" : 'Atualizar',
+                  mensagem_snackbar: opcao=='C'? "Cadastro realizado com sucesso." : "Atualizado com sucesso.",
+                  funcao: () {
+                    //valida os campos, caso estejam validos, cadastra.
+                    if (widget._formKey.currentState!.validate()) {
+                      //chamada ao servico de cadastro da anotacao
+                      Map<String,dynamic> novosValores = {};
+                      novosValores['titulo'] =  controllerTitulo.text.toString();
+                      novosValores['descricao'] =   controllerDescricao.text.toString();
+                      novosValores['data'] =   DateTime.now();
+                      if(opcao=='C'){
+                        CadastroAnotacaoServico(
+                          descricao: controllerDescricao.text.toString(),
+                          titulo: controllerTitulo.text.toString(),
+                          data: DateTime.now(),
+                          usuario_email: email,
+                        );
+                      }else{
+                        CadastroAnotacaoServico.atualizarAnotacao(documentoId, novosValores);
+                      }
+                      Navigator.pushReplacementNamed(context, '/anotacoes',arguments: {'email': email});
                     }
-                   Navigator.pushReplacementNamed(context, '/anotacoes',arguments: {'email': email});
-                  }
-                },
+                  },
+                ),
+              ],
               ),
+
             ],
           ),
         ),

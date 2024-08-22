@@ -38,7 +38,7 @@ class _TelaAnotacoesState extends State<TelaAnotacoes> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-               Navigator.pushReplacementNamed(context, "/NovaAnotacao",arguments: {'email':email,'opcao':'C'});
+               Navigator.pushNamed(context, "/NovaAnotacao",arguments: {'email':email,'opcao':'C'});
             },
         tooltip: "Nova anotação",
         backgroundColor: Colors.blueAccent,
