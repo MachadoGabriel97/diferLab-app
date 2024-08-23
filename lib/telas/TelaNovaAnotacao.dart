@@ -47,7 +47,7 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
     return Scaffold(
       drawer: ComponenteMenu(email: email,),
       appBar:  ComponenteAppBar(
-          tituloComponente: "Nova Anotação",mostrarIconeMenu:false, usuarioLogado: email),
+          tituloComponente: "Anotação",mostrarIconeMenu:false, usuarioLogado: email),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Form(
@@ -73,20 +73,23 @@ class _TelaNovaAnotacaoState extends State<TelaNovaAnotacao> {
               const SizedBox(height: 16),
               Row(children: [
                 transformarEmIdeia ?
-                  ComponenteElevatedButton(
-                    formKey: widget._formKey,
-                    corDoBotao: Colors.lightBlue ,
-                    tituloBotao: 'Transformar em idéia',
-                    funcao: () {
-                      Navigator.pushNamed(
-                          context,
-                          '/novaIdeia',
-                          arguments: {
-                            'titulo':controllerTitulo.text,
-                            'descricao':controllerDescricao.text,
-                            'email':email
-                          });
-                    },
+                  Padding(
+                    padding: const EdgeInsets.all(16),
+                    child: ComponenteElevatedButton(
+                      formKey: widget._formKey,
+                      corDoBotao: Colors.lightBlue ,
+                      tituloBotao: 'Transformar em idéia',
+                      funcao: () {
+                        Navigator.pushNamed(
+                            context,
+                            '/novaIdeia',
+                            arguments: {
+                              'titulo':controllerTitulo.text,
+                              'descricao':controllerDescricao.text,
+                              'email':email
+                            });
+                      },
+                    ),
                   ): Container(),
                 ComponenteElevatedButton(
                   formKey: widget._formKey,
