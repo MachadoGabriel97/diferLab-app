@@ -31,7 +31,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
           tooltip: "Nova Idéia",
           hoverColor: const Color(0xFF373C86) ,
-          onPressed: (){ Navigator.pushNamed(context, '/novaIdeia', arguments: {'email': email});},
+          onPressed: (){ Navigator.pushNamed(context, '/novaIdeia', arguments: {'email': email,'titulo':'','descricao':''});},
           child: const Icon(Icons.lightbulb_outline,color: Colors.yellowAccent,)
       ),
       body: Padding(
