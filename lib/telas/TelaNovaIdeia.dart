@@ -1,11 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
+import 'package:navigator_project/componentes/componenteElevatedButton.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 import 'package:navigator_project/servicos/CadastroIdeiasServico.dart';
 
 class TelaNovaIdeia extends StatefulWidget {
   TelaNovaIdeia({super.key});
+  final _formKey = GlobalKey<FormState>();
   @override
   State<TelaNovaIdeia> createState() => _TelaNovaIdeiaState();
 }
@@ -42,23 +44,32 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
         child: Padding(
           padding: const EdgeInsets.all(32.0),
           child: Form(
+            key: widget._formKey,
             child: ListView(
               children: [
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: 'Título',
                   ),
-                  //initialValue: _controllerTitulo.text,
                   controller: _controllerTitulo,
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return 'Campo obrigatório, não deve ser vazio';
+                    }
+                  },
                   maxLength: 100,
                 ),
                 TextFormField(
                   decoration: const InputDecoration(
                     labelText: 'Descrição (Problema ou melhoria)',
                   ),
-                  //initialValue: _controllerDescricao.text,
                   maxLength: 1000,
                   controller: _controllerDescricao,
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return 'Campo obrigatório, não deve ser vazio';
+                    }
+                  },
                   maxLines: 5,
                 ),
                 TextFormField(
@@ -67,6 +78,11 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                   ),
                   maxLength: 1000,
                   controller: _controllerSolucao,
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return 'Campo obrigatório, não deve ser vazio';
+                    }
+                  },
                   maxLines: 5,
                 ),
                 TextFormField(
@@ -75,6 +91,11 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                   ),
                   maxLength: 1000,
                   controller: _controllerBeneficios,
+                  validator: (value) {
+                    if(value!.isEmpty){
+                      return 'Campo obrigatório, não deve ser vazio';
+                    }
+                  },
                   maxLines: 5,
                 ),
                 const SizedBox(height: 16),
@@ -118,30 +139,31 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                   ],
                 ),
                 const SizedBox(height: 16),
-                ElevatedButton(
-                  onPressed: () {
-                    CadastroIdeiaServico(
-                        titulo: _controllerTitulo.text,
-                        descricao: _controllerDescricao.text,
-                        solucao_proposta: _controllerSolucao.text,
-                        beneficios: _controllerBeneficios.text,
-                        aceitaTermoLgdp:  selecao_termo!,
-                        data_cadastro: DateTime.now(),
-                        usuario_email: _email!);
-                    ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
-                      backgroundColor: Colors.green,
-                      showCloseIcon: false,
-                      duration:  Duration(seconds: 5),
-                      content:  Text(
-                          'Cadastro realizado com sucesso!'),
-                    ));
-                    Navigator.pushReplacementNamed(context, '/minhasIdeias',arguments: {'email':_email});
-                  },
-                  style: const ButtonStyle(
-                    backgroundColor:  WidgetStatePropertyAll(Colors.blue),
-                  ),
-                  child: const Text('Salvar', style: TextStyle(color: Colors.white),),
-                ),
+                ComponenteElevatedButton(
+                    formKey: widget._formKey,
+                    corDoBotao: Colors.blue,
+                    tituloBotao: 'Salvar',
+                    funcao: (){
+                      if(widget._formKey.currentState!.validate()){
+                        CadastroIdeiaServico(
+                            titulo: _controllerTitulo.text,
+                            descricao: _controllerDescricao.text,
+                            solucao_proposta: _controllerSolucao.text,
+                            beneficios: _controllerBeneficios.text,
+                            aceitaTermoLgdp:  selecao_termo!,
+                            data_cadastro: DateTime.now(),
+                            usuario_email: _email!);
+                        ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
+                          backgroundColor: Colors.green,
+                          showCloseIcon: false,
+                          duration:  Duration(seconds: 5),
+                          content:  Text(
+                              'Cadastro realizado com sucesso!'),
+                        ));
+                        Navigator.pushReplacementNamed(context, '/minhasIdeias',arguments: {'email':_email});
+                      }
+                    })
+                ,
               ],
             ),
           ),
