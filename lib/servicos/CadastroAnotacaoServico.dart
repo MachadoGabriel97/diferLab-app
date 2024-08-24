@@ -53,7 +53,7 @@ class CadastroAnotacaoServico {
       }
 
       if (anotacoes.isEmpty) {
-        print('Nenhuma anotação encontrada para o usuário com o e-mail: $email.');
+        print('Nenhuma anotação encontrada para o usuário com o e-mail: $email');
       }
 
     } catch (e) {

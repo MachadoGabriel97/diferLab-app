@@ -149,7 +149,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                     tituloBotao: 'Salvar',
                     funcao: (){
                       if(widget._formKey.currentState!.validate()){
-                        CadastroIdeiaServico(
+                        CadastroIdeiaServico ideia = CadastroIdeiaServico(
                             titulo: _controllerTitulo.text,
                             descricao: _controllerDescricao.text,
                             solucao_proposta: _controllerSolucao.text,
@@ -157,6 +157,8 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                             aceitaTermoLgdp:  selecao_termo!,
                             data_cadastro: DateTime.now(),
                             usuario_email: _email!);
+
+                        ideia.inserir();
                         ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
                           backgroundColor: Colors.green,
                           showCloseIcon: false,
