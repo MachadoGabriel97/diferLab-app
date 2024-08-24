@@ -56,6 +56,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                     if(value!.isEmpty){
                       return 'Campo obrigatório, não deve ser vazio';
                     }
+                    return null;
                   },
                   maxLength: 100,
                 ),
@@ -69,6 +70,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                     if(value!.isEmpty){
                       return 'Campo obrigatório, não deve ser vazio';
                     }
+                    return null;
                   },
                   maxLines: 5,
                 ),
@@ -82,6 +84,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                     if(value!.isEmpty){
                       return 'Campo obrigatório, não deve ser vazio';
                     }
+                    return null;
                   },
                   maxLines: 5,
                 ),
@@ -95,6 +98,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                     if(value!.isEmpty){
                       return 'Campo obrigatório, não deve ser vazio';
                     }
+                    return null;
                   },
                   maxLines: 5,
                 ),
@@ -162,8 +166,8 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                         ));
                         Navigator.pushReplacementNamed(context, '/minhasIdeias',arguments: {'email':_email});
                       }
-                    })
-                ,
+                    }
+                ),
               ],
             ),
           ),
