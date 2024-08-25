@@ -156,7 +156,7 @@ class _TelaNovaIdeiaState extends State<TelaNovaIdeia> {
                             beneficios: _controllerBeneficios.text,
                             aceitaTermoLgdp:  selecao_termo!,
                             data_cadastro: DateTime.now(),
-                            usuario_email: _email!);
+                            usuario_email: _email!, status: 'analise');
 
                         ideia.inserir();
                         ScaffoldMessenger.of(context).showSnackBar( const SnackBar(

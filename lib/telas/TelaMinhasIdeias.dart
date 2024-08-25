@@ -1,4 +1,6 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
 import 'package:navigator_project/servicos/CadastroIdeiasServico.dart';
 import '../componentes/componenteAppBar.dart';
@@ -72,6 +74,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
                   DropdownButtonFormField<String>(
                     decoration:
                     const InputDecoration(labelText: 'Selecione uma situação'),
+                    key:Key('filtro_situacao'),
                     items: const [
                       DropdownMenuItem(value: null, child: Text('Não Filtrar')),
                       DropdownMenuItem(value: 'analise', child: Text('Análise')),
@@ -80,7 +83,9 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
                       DropdownMenuItem(value: 'concluido', child: Text('Concluido')),
                       DropdownMenuItem(value: 'rejeitado', child: Text('Rejeitado')),
                     ],
-                    onChanged: (value) {},
+                    onChanged: (value) {
+                      print(value);
+                    },
                   )
                 ],
               ),
@@ -94,7 +99,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
   Widget carregar_tabela() {
     return Expanded(
       child: FutureBuilder<List<Map<String, dynamic>>>(
-        future: CadastroIdeiaServico.buscarIdeiasGeral(),
+        future: CadastroIdeiaServico.buscarIdeiasPorUsuario(email),
         builder: (BuildContext context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
@@ -106,7 +111,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
             return const Center(child: Text('Nenhuma Ideia encontrada.'));
           } else {
             final ideias = snapshot.data!;
-            print('Ideias carregadas: $ideias');
+            //print('Ideias carregadas: $ideias');
             return ListView(
               children: [
                 DataTable(
@@ -121,24 +126,26 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
                     return DataRow(
                       cells: [
                         DataCell(Wrap(children: [Text(ideia['protocolo'])])),
-                        DataCell(Wrap(children: [Text(ideia['title'])])),
-                        DataCell(Wrap(children: [Text(ideia['date'])])),
+                        DataCell(Wrap(children: [Text(ideia['titulo'])])),
+                        DataCell(Wrap(children: [Text(DateFormat('dd/MM/yyyy HH:mm').format(ideia['data_cadastro'].toDate()))])),
                         DataCell(Wrap(children: [Text(ideia['status'])])),
                         DataCell(
                           IconButton(
                             icon: const Icon(Icons.search),
                             onPressed: () {
-                              Navigator.pushNamed(context, '/detalhes', arguments: {
-                                'email': ideia['email'],
-                                'protocolo': ideia['protocolo'],
-                                'title': ideia['title'],
-                                'date': ideia['date'],
-                                'status': ideia['status'],
-                                'description': ideia['description'],
-                                'proposal': ideia['proposal'],
-                                'benefits': ideia['benefits'],
-                                'feedback': ideia['feedback'],
-                              });
+                              Navigator.pushNamed(
+                                  context,
+                                  '/detalhes',
+                                  arguments: {
+                                            'usuario_email': ideia['usuario_email'],
+                                            'protocolo': ideia['protocolo'],
+                                            'titulo': ideia['titulo'],
+                                            'data_cadastro': ideia['data_cadastro'],
+                                            'status': ideia['status'],
+                                            'descricao': ideia['descricao'],
+                                            'solucao_proposta': ideia['solucao_proposta'],
+                                            'beneficios': ideia['beneficios'],
+                                          });
                             },
                           ),
                         ),
