@@ -5,6 +5,7 @@ class CadastroIdeiaServico {
   final String titulo;
   final String descricao;
   final String solucao_proposta;
+  final String status;
   final String beneficios;
   final bool aceitaTermoLgdp; //true - aceita - false - rejeita
   final DateTime data_cadastro;
@@ -15,6 +16,7 @@ class CadastroIdeiaServico {
   CadastroIdeiaServico({
     required this.descricao,
     required this.titulo,
+    required this.status,
     required this.solucao_proposta,
     required this.beneficios,
     required this.aceitaTermoLgdp,
@@ -27,6 +29,7 @@ class CadastroIdeiaServico {
       'protocolo': _protocolo,
       'descricao': descricao,
       'titulo': titulo,
+      'status': status,
       'solucao_proposta': solucao_proposta,
       'beneficios': beneficios,
       'aceitaTermoLgdp': aceitaTermoLgdp,
@@ -60,6 +63,7 @@ class CadastroIdeiaServico {
             {'protocolo': doc['protocolo'],
               'descricao': doc['descricao'],
               'titulo': doc['titulo'],
+              'status': doc['status'],
               'solucao_proposta': doc['solucao_proposta'],
               'beneficios': doc['beneficios'],
               'aceitaTermoLgdp': doc['aceitaTermoLgdp'],
@@ -91,6 +95,7 @@ class CadastroIdeiaServico {
             {'protocolo': doc['protocolo'],
               'descricao': doc['descricao'],
               'titulo': doc['titulo'],
+              'status': doc['status'],
               'solucao_proposta': doc['solucao_proposta'],
               'beneficios': doc['beneficios'],
               'aceitaTermoLgdp': doc['aceitaTermoLgdp'],
