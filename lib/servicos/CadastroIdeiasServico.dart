@@ -115,7 +115,7 @@ class CadastroIdeiaServico {
   }
 
   Future<void> atualizarIdeia(String docId) async {
-    final docRef = db.collection("ideia").doc(docId);
+    final docRef = db.collection("ideias").doc(docId);
     try {
       await docRef.update(toMap(docId));
       print('Documento atualizado com sucesso: $docId');
@@ -124,11 +124,11 @@ class CadastroIdeiaServico {
     }
   }
 
-  Future<void> deletarIdeia(String docId) async {
-    final docRef = db.collection("anotacoes").doc(docId);
+  static Future<void> deletarIdeia(String protocolo) async {
+    final docRef = FirebaseFirestore.instance.collection("ideias").doc(protocolo);
     try {
       await docRef.delete();
-      print('Documento Deletado com sucesso: $docId');
+      print('Documento Deletado com sucesso: $protocolo');
     } catch (error) {
       print('Erro ao atualizar o documento: $error');
     }

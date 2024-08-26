@@ -74,7 +74,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
                   DropdownButtonFormField<String>(
                     decoration:
                     const InputDecoration(labelText: 'Selecione uma situação'),
-                    key:Key('filtro_situacao'),
+                    key:const Key('filtro_situacao'),
                     items: const [
                       DropdownMenuItem(value: null, child: Text('Não Filtrar')),
                       DropdownMenuItem(value: 'analise', child: Text('Análise')),
@@ -113,6 +113,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
             final ideias = snapshot.data!;
             //print('Ideias carregadas: $ideias');
             return ListView(
+
               children: [
                 DataTable(
                   columns: const [
@@ -121,6 +122,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
                     DataColumn(label: Text('Data Sugestão')),
                     DataColumn(label: Text('Status')),
                     DataColumn(label: Text('Detalhes')),
+                    DataColumn(label: Text('Deletar')),
                   ],
                   rows: ideias.map((ideia) {
                     return DataRow(
@@ -149,7 +151,44 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
                             },
                           ),
                         ),
-                      ],
+                        DataCell(
+                         ideia['status'] == 'analise'?
+                         IconButton(
+                          icon: const Icon(Icons.delete_forever, color: Colors.red),
+                          onPressed: () async {
+                          bool confirmar = await showDialog(
+                            context: context,
+                            builder: (context) => AlertDialog(
+                              title: const Text("Confirmação"),
+                              content: const Text("Tem certeza que deseja deletar esta idéia ?"),
+                              actions: [
+                                TextButton(
+                                  child: const Text("Cancelar"),
+                                  onPressed: () => Navigator.of(context).pop(false),
+                                ),
+                                TextButton(
+                                  child: const Text("Deletar"),
+                                  onPressed: () => Navigator.of(context).pop(true),
+                                ),
+                              ],
+                            ),
+                          );
+                          if(confirmar) {
+                            await CadastroIdeiaServico.deletarIdeia(ideia['protocolo']);
+                          }
+                        },
+                        ): IconButton(
+                          icon: const Icon(Icons.delete_forever, color: Colors.grey),
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
+                              backgroundColor: Colors.red,
+                              showCloseIcon: false,
+                              duration: Duration(seconds: 5),
+                              content:  Text(
+                                  "Protocolo já passou por aprovação, não pode mais ser deletado!"),
+                            ));
+                          },
+                        ) ,)],
                     );
                   }).toList(),
                 ),
