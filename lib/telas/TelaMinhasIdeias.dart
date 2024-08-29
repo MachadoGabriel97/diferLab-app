@@ -168,7 +168,12 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
                                 ),
                                 TextButton(
                                   child: const Text("Deletar"),
-                                  onPressed: () => Navigator.of(context).pop(true),
+                                  onPressed: (){
+                                    Navigator.of(context).pop(true);
+                                    setState(() {
+
+                                    });
+                                  },
                                 ),
                               ],
                             ),
