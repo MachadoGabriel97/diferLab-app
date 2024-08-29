@@ -45,7 +45,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                   //todo: criar logica para image picker e carregar imagem pro firebase storage
                   GestureDetector(
                     onTap: (){
-                      Navigator.pushReplacementNamed(context, '/imageupload',arguments: {'email':email});
+
                     },
                     //Todo: adicionar logica para buscar a imagem do perfil do usuario
                     child: const CircleAvatar(
