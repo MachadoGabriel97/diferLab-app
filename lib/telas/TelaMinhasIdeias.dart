@@ -12,6 +12,8 @@ class TelaMinhasIdeias extends StatefulWidget {
 
 class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
   late String email = '';
+  List<Map<String, dynamic>> ideias = [];
+  String? filtroSituacao; // Variável para armazenar o valor selecionado no filtro
 
   @override
   void initState() {
@@ -24,6 +26,16 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
     });
   }
 
+  // Método para buscar e filtrar ideias
+  Future<List<Map<String, dynamic>>> buscarIdeiasFiltradas() async {
+    List<Map<String, dynamic>> todasIdeias = await CadastroIdeiaServico.buscarIdeiasPorUsuario(email);
+    if (filtroSituacao == null) {
+      return todasIdeias;
+    } else {
+      return todasIdeias.where((ideia) => ideia['status'] == filtroSituacao).toList();
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,8 +46,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
       drawer: ComponenteMenu(email: email),
       floatingActionButton: FloatingActionButton(
           backgroundColor: const Color(0xFF242849),
-          shape:
-          RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
           tooltip: "Nova Idéia",
           hoverColor: const Color(0xFF373C86),
           onPressed: () {
@@ -51,7 +62,7 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
         child: Column(
           children: [
             carregar_filtros(),
-            carregar_tabela()
+            carregar_tabela(),
           ],
         ),
       ),
@@ -72,19 +83,21 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
                 children: [
                   const Text('Filtros:'),
                   DropdownButtonFormField<String>(
-                    decoration:
-                    const InputDecoration(labelText: 'Selecione uma situação'),
-                    key:const Key('filtro_situacao'),
+                    decoration: const InputDecoration(labelText: 'Selecione uma situação'),
+                    key: const Key('filtro_situacao'),
+                    value: filtroSituacao,
                     items: const [
                       DropdownMenuItem(value: null, child: Text('Não Filtrar')),
                       DropdownMenuItem(value: 'analise', child: Text('Análise')),
                       DropdownMenuItem(value: 'aprovado', child: Text('Aprovado')),
                       DropdownMenuItem(value: 'em_andamento', child: Text('Em Andamento')),
-                      DropdownMenuItem(value: 'concluido', child: Text('Concluido')),
+                      DropdownMenuItem(value: 'concluido', child: Text('Concluído')),
                       DropdownMenuItem(value: 'rejeitado', child: Text('Rejeitado')),
                     ],
                     onChanged: (value) {
-                      print(value);
+                      setState(() {
+                        filtroSituacao = value; // Atualiza o filtro
+                      });
                     },
                   )
                 ],
@@ -98,110 +111,118 @@ class _TelaMinhasIdeiasState extends State<TelaMinhasIdeias> {
 
   Widget carregar_tabela() {
     return Expanded(
-      child: FutureBuilder<List<Map<String, dynamic>>>(
-        future: CadastroIdeiaServico.buscarIdeiasPorUsuario(email),
-        builder: (BuildContext context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            print('Erro: ${snapshot.error}');
-            return Center(child: Text('Erro: ${snapshot.error}'));
-          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            print('Nenhuma Ideia encontrada.');
-            return const Center(child: Text('Nenhuma Ideia encontrada.'));
-          } else {
-            final ideias = snapshot.data!;
-            //print('Ideias carregadas: $ideias');
-            return ListView(
-
-              children: [
-                DataTable(
-                  columns: const [
-                    DataColumn(label: Text('Protocolo')),
-                    DataColumn(label: Text('Título')),
-                    DataColumn(label: Text('Data Sugestão')),
-                    DataColumn(label: Text('Status')),
-                    DataColumn(label: Text('Detalhes')),
-                    DataColumn(label: Text('Deletar')),
-                  ],
-                  rows: ideias.map((ideia) {
-                    return DataRow(
-                      cells: [
-                        DataCell(Wrap(children: [Text(ideia['protocolo'])])),
-                        DataCell(Wrap(children: [Text(ideia['titulo'])])),
-                        DataCell(Wrap(children: [Text(DateFormat('dd/MM/yyyy HH:mm').format(ideia['data_cadastro'].toDate()))])),
-                        DataCell(Wrap(children: [Text(ideia['status'])])),
-                        DataCell(
-                          IconButton(
-                            icon: const Icon(Icons.search),
-                            onPressed: () {
-                              Navigator.pushNamed(
-                                  context,
-                                  '/detalhes',
-                                  arguments: {
-                                            'usuario_email': ideia['usuario_email'],
-                                            'protocolo': ideia['protocolo'],
-                                            'titulo': ideia['titulo'],
-                                            'data_cadastro': ideia['data_cadastro'],
-                                            'status': ideia['status'],
-                                            'descricao': ideia['descricao'],
-                                            'solucao_proposta': ideia['solucao_proposta'],
-                                            'beneficios': ideia['beneficios'],
-                                          });
-                            },
-                          ),
-                        ),
-                        DataCell(
-                         ideia['status'] == 'analise'?
-                         IconButton(
-                          icon: const Icon(Icons.delete_forever, color: Colors.red),
-                          onPressed: () async {
-                          bool confirmar = await showDialog(
-                            context: context,
-                            builder: (context) => AlertDialog(
-                              title: const Text("Confirmação"),
-                              content: const Text("Tem certeza que deseja deletar esta idéia ?"),
-                              actions: [
-                                TextButton(
-                                  child: const Text("Cancelar"),
-                                  onPressed: () => Navigator.of(context).pop(false),
+        child: FutureBuilder<List<Map<String, dynamic>>>(
+          future: buscarIdeiasFiltradas(), // Utiliza o método que aplica o filtro
+          builder: (BuildContext context, AsyncSnapshot<List<Map<String, dynamic>>> snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              print('Erro: ${snapshot.error}');
+              return Center(child: Text('Erro: ${snapshot.error}'));
+            } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              print('Nenhuma Ideia encontrada.');
+              return const Center(child: Text('Nenhuma Ideia encontrada.'));
+            } else {
+              ideias = snapshot.data!;
+              return Container(
+                width: double.infinity,
+                child: SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: ConstrainedBox(
+                    constraints: BoxConstraints(minWidth: MediaQuery.of(context).size.width),
+                    child: SingleChildScrollView(
+                      scrollDirection: Axis.vertical,
+                      child:DataTable(
+                          columns: const [
+                            DataColumn(label: Center(child:Text('Protocolo'))),
+                            DataColumn(label: Center(child:Text('Título'))),
+                            DataColumn(label: Center(child:Text('Data Sugestão'))),
+                            DataColumn(label: Center(child:Text('Status'))),
+                            DataColumn(label: Text('Detalhes')),
+                            DataColumn(label: Text('Deletar')),
+                          ],
+                          rows: ideias.map((ideia) {
+                            return DataRow(
+                              cells: [
+                                DataCell(Center(child: Text(ideia['protocolo']))),
+                                DataCell(Center(child: Text(ideia['titulo']))),
+                                DataCell(Center(child: Text(DateFormat('dd/MM/yyyy HH:mm').format(ideia['data_cadastro'].toDate())))),
+                                DataCell(Center(child: Text(ideia['status']))),
+                                DataCell(
+                                  IconButton(
+                                    icon: const Icon(Icons.search),
+                                    onPressed: () {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/detalhes',
+                                        arguments: {
+                                          'usuario_email': ideia['usuario_email'],
+                                          'protocolo': ideia['protocolo'],
+                                          'titulo': ideia['titulo'],
+                                          'data_cadastro': ideia['data_cadastro'],
+                                          'status': ideia['status'],
+                                          'descricao': ideia['descricao'],
+                                          'solucao_proposta': ideia['solucao_proposta'],
+                                          'beneficios': ideia['beneficios'],
+                                        },
+                                      );
+                                    },
+                                  ),
                                 ),
-                                TextButton(
-                                  child: const Text("Deletar"),
-                                  onPressed: (){
-                                    Navigator.of(context).pop(true);
-                                    setState(() {
-
-                                    });
-                                  },
+                                DataCell(
+                                  ideia['status'] == 'analise'
+                                      ? IconButton(
+                                    icon: const Icon(Icons.delete_forever, color: Colors.red),
+                                    onPressed: () async {
+                                      bool confirmar = await showDialog(
+                                        context: context,
+                                        builder: (context) => AlertDialog(
+                                          title: const Text("Confirmação"),
+                                          content: const Text("Tem certeza que deseja deletar esta ideia?"),
+                                          actions: [
+                                            TextButton(
+                                              child: const Text("Cancelar"),
+                                              onPressed: () => Navigator.of(context).pop(false),
+                                            ),
+                                            TextButton(
+                                              child: const Text("Deletar"),
+                                              onPressed: () {
+                                                Navigator.of(context).pop(true);
+                                                setState(() {});
+                                              },
+                                            ),
+                                          ],
+                                        ),
+                                      );
+                                      if (confirmar) {
+                                        await CadastroIdeiaServico.deletarIdeia(ideia['protocolo']);
+                                      }
+                                    },
+                                  )
+                                      : IconButton(
+                                    icon: const Icon(Icons.delete_forever, color: Colors.grey),
+                                    onPressed: () {
+                                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                                        backgroundColor: Colors.red,
+                                        showCloseIcon: false,
+                                        duration: Duration(seconds: 5),
+                                        content: Text(
+                                            "Protocolo já passou da etapa de análise, não pode mais ser deletado!"),
+                                      ));
+                                    },
+                                  ),
                                 ),
                               ],
-                            ),
-                          );
-                          if(confirmar) {
-                            await CadastroIdeiaServico.deletarIdeia(ideia['protocolo']);
-                          }
-                        },
-                        ): IconButton(
-                          icon: const Icon(Icons.delete_forever, color: Colors.grey),
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar( const SnackBar(
-                              backgroundColor: Colors.red,
-                              showCloseIcon: false,
-                              duration: Duration(seconds: 5),
-                              content:  Text(
-                                  "Protocolo já passou por aprovação, não pode mais ser deletado!"),
-                            ));
-                          },
-                        ) ,)],
-                    );
-                  }).toList(),
+                            );
+                          }).toList(),
+                        ),
+                    ),
+                  ),
                 ),
-              ],
-            );
-          }
-        },
-      ),
+              );
+            }
+          },
+        ),
     );
   }
 }
