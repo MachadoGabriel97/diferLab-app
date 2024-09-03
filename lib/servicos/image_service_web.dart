@@ -1,29 +1,16 @@
-import 'dart:typed_data';
-import 'dart:io';
+// image_service_web.dart
+
 import 'dart:html' as html;
+import 'dart:typed_data';
 import 'dart:async';
 
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:flutter/foundation.dart' show kIsWeb;
 
 class ImageService {
-  static final picker = ImagePicker();
-
-  static Future<File?> pickImageMobile() async {
-    final pickedFile = await picker.pickImage(source: ImageSource.gallery);
-    if (pickedFile != null) {
-      return File(pickedFile.path);
-    } else {
-      print('Nenhuma imagem selecionada.');
-      return null;
-    }
-  }
-
-  static Future<Uint8List?> pickImageWeb() async {
+  static Future<Uint8List?> pickImage() async {
     html.FileUploadInputElement uploadInput = html.FileUploadInputElement();
-    uploadInput.accept = 'avatar_usuarios/*';
+    uploadInput.accept = 'image/*';
     uploadInput.click();
 
     final completer = Completer<Uint8List?>();
@@ -43,24 +30,14 @@ class ImageService {
     return completer.future;
   }
 
-  static Future<String?> uploadImage({File? imageFile, Uint8List? webImage, required String email}) async {
-    if (kIsWeb && webImage == null) return null;
-    if (!kIsWeb && imageFile == null) return null;
+  static Future<String?> uploadImage({Uint8List? webImage, required String email}) async {
+    if (webImage == null) return null;
 
     try {
-      String fileName;
-      UploadTask uploadTask;
-
-      if (kIsWeb) {
-        fileName = '$email.png'; // Nome do arquivo para Web
-        uploadTask = FirebaseStorage.instance
-            .ref('avatar_usuarios/$fileName')
-            .putData(webImage!, SettableMetadata(contentType: 'image/png'));
-      } else {
-        fileName = imageFile!.path.split('/').last; // Nome do arquivo para Mobile
-        Reference storageRef = FirebaseStorage.instance.ref().child('avatar_usuarios/$fileName');
-        uploadTask = storageRef.putFile(imageFile, SettableMetadata(contentType: 'image/jpeg'));
-      }
+      String fileName = '$email.png'; // Nome do arquivo para Web
+      UploadTask uploadTask = FirebaseStorage.instance
+          .ref('avatar_usuarios/$fileName')
+          .putData(webImage, SettableMetadata(contentType: 'image/png'));
 
       TaskSnapshot taskSnapshot = await uploadTask;
       String downloadURL = await taskSnapshot.ref.getDownloadURL();

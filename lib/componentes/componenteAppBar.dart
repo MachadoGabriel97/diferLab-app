@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:navigator_project/servicos/ImageService.dart';
+
+import 'package:navigator_project/servicos/image_service.dart';
+
 
 class ComponenteAppBar extends StatefulWidget implements PreferredSizeWidget {
   final String tituloComponente;
@@ -43,7 +45,9 @@ class _ComponenteAppBarState extends State<ComponenteAppBar> {
 
   Future<void> buscaImagem() async {
     try {
+
       var url = await ImageService.pesquisarUrlDoAvatarPorEmail(widget.usuarioLogado.toString());
+
       //print('url:$url');
       //print('metodobusca imagem- email:${widget.usuarioLogado.toString()}');
       setState(() {

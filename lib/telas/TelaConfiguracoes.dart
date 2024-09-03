@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:navigator_project/componentes/componenteAppBar.dart';
 import 'package:navigator_project/componentes/componenteEditText.dart';
 import 'package:navigator_project/componentes/componenteMenu.dart';
-import 'package:navigator_project/servicos/ImageService.dart';
+import 'package:navigator_project/servicos/image_service.dart';
 
 enum Sexo {masculino, feminino}
 
@@ -46,7 +46,7 @@ class _TelaConfiguracoesState extends State<TelaConfiguracoes> {
                   //todo: criar logica para image picker e carregar imagem pro firebase storage
                   GestureDetector(
                     onTap: (){
-                      ImageService.pesquisarUrlDoAvatarPorEmail(email.toString());
+                    //  ImageService.pesquisarUrlDoAvatarPorEmail(email.toString());
                     },
                     //Todo: adicionar logica para buscar a imagem do perfil do usuario
                     child: const CircleAvatar(
