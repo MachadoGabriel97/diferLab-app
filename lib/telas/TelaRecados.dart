@@ -30,7 +30,8 @@ class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
         appBar: ComponenteAppBar(
           tituloComponente: "Recados", mostrarIconeMenu:true,
           usuarioLogado: email,),
-        body: const Padding(
+        backgroundColor: const Color(0xFF242849),
+        body: Padding(
           padding: EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -39,17 +40,8 @@ class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
               Center(
                 child: Column(
                   children: [
-                    Text(
-                      'Seja bem-vindo!',
-                      style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-                    ),
-                    SizedBox(height: 16),
-                    Text(
-                      'Adoramos te acompanhar nessa jornada de criatividade e inspirações.\n\nConte conosco com o que precisar.\n\nEquipe Gente e Cultura (Diferpan - Matriz)',
-                      style: TextStyle(fontSize: 16),
-                      textAlign: TextAlign.center,
-                    ),
-                    SizedBox(height: 28),
+                    criarCard('Seja bem-vindo!',),
+                    criarCard(" Adoramos te acompanhar nessa jornada de criatividade e inspirações.\n\nConte conosco com o que precisar.\n\nEquipe Gente e Cultura (Diferpan - Matriz)',"),
                   ],
                 ),
               ),
@@ -58,6 +50,28 @@ class _TelaPrincipalRecadosState extends State<TelaPrincipalRecados> {
         ),
     );
   }
+
+  Widget criarCard(String texto) {
+    return  Card(
+      margin: EdgeInsets.all(32),
+      shadowColor: Colors.black,
+      elevation: 2.0,
+      color: Colors.white,
+      child: Column(
+        children: [
+          Padding(
+              padding: EdgeInsets.all(16),
+            child: Text(
+              texto,
+              style: TextStyle(fontSize: 16),
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
 
 
 }
